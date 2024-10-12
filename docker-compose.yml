@@ -3,6 +3,29 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # TODO
+    container_name: wbd-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/src:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - wbd-network
   db:
-# TODO
+    image: postgres:16-alpine
+    container_name: wbd-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: linkinpurry
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - wbd-network
+volumes:
+  db_data:
+networks:
+  wbd-network:
