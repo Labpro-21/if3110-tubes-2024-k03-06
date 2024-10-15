@@ -1,19 +1,39 @@
 <?php
+spl_autoload_register(function ($class_name) {
+    require_once __DIR__ . '/models/' . $class_name . '.php';
+});
+
 session_start();
 require_once __DIR__ . '/controllers/LoginController.php';
 
-$action = $_GET['action'] ?? '';
+$page = isset($_GET['page'])? $_GET['page'] : 'home';
 
-if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $loginController = new LoginController();
-    if ($loginController->login($email, $password)) {
-        echo '<script src="/public/index.js"></script>';
-    } else {
-        header("Location: /?error=Invalid credentials");
-    }
-} else {
-    require __DIR__ . '/views/login.php';
+switch ($page) {
+    case 'login':
+        require_once __DIR__ . '/public/views/login/login.php';
+        break;
+    
+    case 'login-process':
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $loginController = new LoginController();
+            $loginController->login($email, $password);
+        } else {
+            header("Location: index .php?page=login&error=Invalid request");
+            exit();
+        }
+        break;
+
+    case 'register':
+        # code...
+        break;
+
+    case 'home':
+        require_once __DIR__ . '/views/homepage/homecomp.php';
+        break;
+    default:
+        header("Location: index.php?page=login");
+        exit();
 }
 ?>
