@@ -5,11 +5,12 @@
     <title>Login</title>
 </head>
 <body>
+    <?php include '../navbar/navbarcomp.php'; ?>
     <h2>Login</h2>
     <?php if(isset($_GET['error'])): ?>
         <p style="color:red;"><?php echo $_GET['error']; ?></p>
     <?php endif; ?>
-    <form action="index.php?action=login" method="POST">
+    <form action="index.php?page=login-process" method="POST">
         <label>Email:</label>
         <input type="email" name="email" required>
         <br>
