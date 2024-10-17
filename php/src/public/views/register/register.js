@@ -3,15 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const roleInput = document.getElementById('role');
     const roleInputError = document.getElementById('roleError');
 
-    // roleInput.addEventListener('blur', function() {
-    //     let role = this.value;
-
-    //     if (!hasInput(role)) {
-    //         this.classList.add('invalid');
-    //         roleInputError.textContent = 'Please select the role you want to register!';
-    //     }
-    // });
-
     roleInput.addEventListener('change', function() {
         let role = this.value;
     

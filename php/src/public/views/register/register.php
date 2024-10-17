@@ -24,7 +24,7 @@
 </h1>
 
 <section class="reg-card">
-    <form id="reg-form">
+    <form id="reg-form" method="POST">
         
         <div class="form-group">
             <label for="name">Register as</label>
