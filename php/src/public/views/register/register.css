@@ -1,0 +1,147 @@
+body {
+    background-color: #f3f2f0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.hidden { display: none; }
+.error { color: red; }
+.invalid { border-color: red; }
+
+nav {
+    margin-bottom: 0;
+}
+
+/* .logo {
+    height: 40px;
+    width: auto;
+    padding: 0 200px 0 100px;
+    vertical-align: middle;
+    margin-bottom: 0;
+} */
+
+.main-sub {
+    padding: 24px 16px !important;
+    text-align: center !important;
+    font-weight: 500 !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+    font-size: 24px !important;
+}
+
+.reg-card{
+    width: auto;
+    max-width: 352px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 24px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.select-box {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    appearance: none;
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 0 14px 0 14px;
+    width: 100%;
+    color: black;
+    font-size: 16px;
+    height: 30px;
+}
+
+.select-box:hover {
+    cursor: pointer;
+}
+
+.select-box:active {
+    outline: none;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 250px;
+}
+
+.form-group small {
+    font-weight: 500;
+    height: 6px;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    height: 22px;
+}
+
+.form-group input,  .form-group textarea{
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    padding: 0 14px 0 14px;
+    resize: none;
+}
+
+.form-group input {
+    height: 30px;
+}
+
+.form-group textarea {
+    height: 90px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-container button {
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    height: min-content;
+    min-height: 48px;
+    padding: 12px 24px;
+    text-align: center;
+    background-color: #0a66c2;
+    color: white;
+
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    transition: 0.1s ease;
+}
+
+.button-container button:hover {
+    background-color: #004182;
+    cursor: pointer;
+}
+
+.login-href {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 16px 0 8px 0;
+    font-weight: 400;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.login-href a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #0a66c2;
+    transition: 0.01s;
+}
+
+.login-href a:hover {
+    text-decoration: underline;
+    font-weight: 600;
+}
