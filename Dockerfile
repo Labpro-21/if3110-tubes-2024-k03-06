@@ -12,3 +12,5 @@ COPY ./php/src /var/www/html/
 
 # Mengatur hak akses
 RUN chown -R www-data:www-data /var/www/html/
+
+COPY ./php/php.ini /usr/local/etc/php/php.ini
