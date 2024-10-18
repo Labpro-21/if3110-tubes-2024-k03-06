@@ -6,7 +6,7 @@ spl_autoload_register(function ($class_name) {
 session_start();
 require_once __DIR__ . '/controllers/LoginController.php';
 
-$page = isset($_GET['page'])? $_GET['page'] : 'home';
+$page = isset($_GET['page'])? $_GET['page'] : 'login';
 
 switch ($page) {
     case 'login':
@@ -30,7 +30,7 @@ switch ($page) {
         break;
 
     case 'home':
-        require_once __DIR__ . '/views/homepage/homecomp.php';
+        require_once __DIR__ . '/public/views/homepage/homejs.php';
         break;
     default:
         header("Location: index.php?page=login");
