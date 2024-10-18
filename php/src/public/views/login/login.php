@@ -2,22 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkinPurry Login</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./login.css">
+
+    <script defer src="./login.js"></script>
 </head>
 <body>
-    <?php include '../navbar/navbarcomp.php'; ?>
-    <h2>Login</h2>
-    <?php if(isset($_GET['error'])): ?>
-        <p style="color:red;"><?php echo $_GET['error']; ?></p>
-    <?php endif; ?>
-    <form action="index.php?page=login-process" method="POST">
-        <label>Email:</label>
-        <input type="email" name="email" required>
-        <br>
-        <label>Password:</label>
-        <input type="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
+
+<header>
+    <!-- <a href="../../../index.php"><img class="logo" src="../../assets/img/linkinPurry-Whole.png" alt="LinkinPurry logo"></a> -->
+     <p>Login</p>
+</header>
+
+<main class="app-content">
+<section class="login-card">
+    <div class="header-content">
+        <h1>Log in</h1>
+    </div>
+    <form id="login-form" method="POST">
+        <div id="emailgroup" class="form-group">
+            <input type="text" id="email" name="email" placeholder="">
+            <label for="email">Email</label>
+            <small id="nameError" class="error"></small>
+        </div>
+        
+        <div id="passwordgroup" class="form-group">
+            <input type="password" id="password" name="password" placeholder="">
+            <label for="email">Password</label>
+            <small id="passwordError" class="error"></small>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Log in</button>
+        </div>
     </form>
+</section>
+
+<div class="subtext">
+    New to LinkinPurry? <a href="/public/views/register/register.php">Register</a>
+</div>
+</main>
+
 </body>
 </html>
