@@ -28,7 +28,8 @@ nav {
 }
 
 .reg-card{
-    width: auto;
+    box-sizing: border-box;
+    width: 100%;
     max-width: 352px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 24px;
@@ -125,6 +126,7 @@ nav {
 }
 
 .login-href {
+    box-sizing: border-box;
     width: 100%;
     text-align: center;
     margin: 0 auto;

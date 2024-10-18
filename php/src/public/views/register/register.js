@@ -35,14 +35,12 @@ document.addEventListener("DOMContentLoaded", function() {
         let role = roleInput.value;
 
         this.querySelectorAll('input, textarea').forEach(input => {
-            if (!(role == "job_seeker" && (input.name == "location" || input.name == "about"))) {
+            if (!input.closest('.hidden')) {
                 validateField({ target: input });
             }
         });
 
-        let invalidField = this.querySelector('.invalid');
-
-        if (invalidField) {
+        if (this.querySelector('.invalid')) {
             alert("Please correct the errors in the form before submitting.");
             event.preventDefault();
         }
@@ -50,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 function hasInput(inputContent) {
-    return inputContent.length > 0;
+    return inputContent.trim().length > 0;
 }
 
 function capitalizeFirstLetter(string) {

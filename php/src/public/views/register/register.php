@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>LinkinPurry Register</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./register.css">
@@ -77,7 +77,7 @@
         </div>
 
         <div class="button-container">
-            <button type="submit" id="companySubmit">Agree & Join</button>
+            <button type="submit" id="submitButton">Agree & Join</button>
         </div>
 
     </form>
