@@ -1,5 +1,8 @@
 <?php
-class SignoutController
+
+include("core/Controller.php");
+
+class SignoutController extends Controller
 {
     public function index()
     {
