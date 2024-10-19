@@ -20,19 +20,25 @@
 
     <div class="navbar-right">
         <div class="nav-item">
-            <img class="change" src="/public/assets/img/home.png">
-            <a href="#">Home</a>
+            <i class="fas fa-home"></i>
+            <a class="nav-text" href="#">Home</a>
         </div>
         <div class="nav-item">
-            <img class="change" src="/public/assets/img/job.png">
-            <a href="#">My Job</a>  
+            <i class='fas fa-briefcase'></i>
+            <a class="nav-text" href="#">Jobs</a>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" id="profile-nav">
             <img src="/public/assets/img/photo.jpeg">
-            <a href="#">Me</a>
+            <a class="nav-text" href="#">Me</a>
+
+            <div class="dropdown-menu">
+                <a class="dropdown" href="#" id="signout">Sign Out</a>
+            </div>
         </div>
     </div>
 </div>
+
+<script src="./public/views/navbar/navbarjs.js"></script>
 
 </body>
 </html>
