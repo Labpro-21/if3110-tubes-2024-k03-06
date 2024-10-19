@@ -1,10 +1,14 @@
 <?php
 
-// var_dump($_SERVER);
-// var_dump($_POST);
+include("models/User.php");
 
 $uri_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+$uri_path = filter_var($uri_path, FILTER_SANITIZE_URL);
 $path = explode('/', $uri_path);
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $controller = !empty($path[0]) ? ucfirst($path[0]) . 'Controller' : 'HomeController';
 $action = !empty($path[1]) ? $path[1] : 'index';
@@ -23,7 +27,8 @@ if (file_exists($controller_path)) {
         echo "Method $method not found in controller $controller";
     }
 } else {
-    echo "Controller $controller not found";
+    // echo "Controller $controller not found";
+    header("Location: /home");
 }
 
 // spl_autoload_register(function ($class_name) {
