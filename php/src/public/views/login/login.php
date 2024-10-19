@@ -46,7 +46,7 @@
         </section>
 
         <div class="subtext">
-            New to LinkinPurry? <a href="/public/views/register/register.php">Register</a>
+            New to LinkinPurry? <a href="/register">Register</a>
         </div>
     </main>
 

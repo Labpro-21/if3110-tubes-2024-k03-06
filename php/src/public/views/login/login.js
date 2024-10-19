@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const formData = new FormData(form);
       console.log(formData);
 
-      fetch("/login", {
+      fetch("/login/login", {
         method: "POST",
         body: formData,
       })

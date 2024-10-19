@@ -8,7 +8,7 @@ class Controller{
         // Include the requested view file
         $viewPath = 'public/views/' . $view . '.php';
 
-        var_dump($viewPath);
+        // var_dump($viewPath);
 
         if (file_exists($viewPath)) {
             include $viewPath;
