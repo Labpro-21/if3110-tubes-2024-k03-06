@@ -1,3 +1,19 @@
+<?php
+$db = Database::getInstance();
+$conn = $db->getConnection();
+$stmt = $conn->prepare("SELECT * FROM _lowongan");
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$lowonganList = $stmt->fetchAll();  // Mengambil semua data dari query
+
+$db = Database::getInstance();
+$conn = $db->getConnection();
+$stmt = $conn->prepare("SELECT * FROM _lowongan");
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$companynameList = $stmt->fetchAll();  // Mengambil semua data dari query
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -71,32 +87,20 @@
             <div class="main-content">
                 <h2>Top job picks for you</h2>
                 <p class="main-content-text">Based on your profile, preferences, and activity like applies, searches, and saves</p>
-                <div class="job-card">
-                    <p class="job-title">Sr Operation Assurance and Operation Readiness Engineer</p>
-                    <p class="job-details">Repsol | On-site</p>
-                    <p class="job-details">Full time</p>
-                </div>
-                <div class="job-card">
-                    <p class="job-title">Staff Software Engineer – JVM/Rust Expert</p>
-                    <p class="job-details">Agoda | Hybrid</p>
-                    <p class="job-details">Part Time</p>
-                </div>
-                <div class="job-card">
-                    <p class="job-title">Java Software Engineer</p>
-                    <p class="job-details">Lancesoft Indonesia | Remote</p>
-                    <p class="job-details">Contract</p>
-                </div>
-                <div class="job-card">
-                    <p class="job-title">Staff Software Engineer – JVM/Rust Expert</p>
-                    <p class="job-details">Agoda | Hybrid</p>
-                    <p class="job-details">Full time</p>
-                </div>
-                <div class="job-card">
-                    <p class="job-title">Sr Operation Assurance and Operation Readiness Engineer</p>
-                    <p class="job-details">Repsol | On-site</p>
-                    <p class="job-details">Full time</p>
-                </div>
-
+                <?php foreach ($lowonganList as $lowongan): ?>
+                    <div class="job-card">
+                        <p class="job-title">
+                            <?php echo $lowongan['posisi']; ?>
+                        </p>
+                        <p class="job-details">Location: 
+                            <?php echo $lowongan['jenis_lokasi']; ?>
+                        </p>
+                        <p class="job-details">Job Type: 
+                            <?php echo $lowongan['jenis_pekerjaan']; ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+                <!-- Akhir perulangan -->
                 <div class="pagination">
                     <button id="prev-btn" class="pagination-button" disabled>
                         <i class="fas fa-angle-left"></i>

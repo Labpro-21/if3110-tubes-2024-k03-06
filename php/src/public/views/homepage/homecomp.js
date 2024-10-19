@@ -3,7 +3,7 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const pageButtonsContainer = document.getElementById('page-buttons');
 
-const jobsPerPage = 4;
+const jobsPerPage = 3;
 let currentPage = 1;
 const totalPages = Math.ceil(jobCards.length / jobsPerPage);
 
