@@ -8,9 +8,9 @@
     <title>LinkinPurry Register</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./register.css">
+    <link rel="stylesheet" href="/public/views/register/register.css">
 
-    <script defer src="register.js"></script>
+    <script defer src="/public/views/register/register.js"></script>
 </head>
 <body>
 
@@ -30,7 +30,7 @@
             <label for="name">Register as</label>
             <select name="role" id="role" class="select-box">
                 <option value="" disabled selected></option>
-                <option value="job_seeker">Job Seeker</option>
+                <option value="jobseeker">Job Seeker</option>
                 <option value="company">Company</option>
             </select>
             <small id="roleError" class="error"></small>
@@ -83,7 +83,7 @@
     </form>
 
     <p class="login-href">
-        Already on LinkinPurry? <a href="/public/views/login/login.php" class="">Log in</a>
+        Already on LinkinPurry? <a href="/login">Log in</a>
     </p>
 
 </section>
