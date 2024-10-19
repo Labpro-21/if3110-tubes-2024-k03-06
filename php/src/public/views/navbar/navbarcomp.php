@@ -20,12 +20,16 @@
 
             <div class="navbar-right">
                 <div class="nav-item">
-                    <img class="change" src="/public/assets/img/home.png" >
+                    <i class="fas fa-home"></i>
                     <a href="#">Home</a>
                 </div>
                 <div class="nav-item">
-                    <img src="/public/assets/img/job.png">
+                    <i class='fas fa-briefcase'></i>
                     <a href="#">Company</a>
+                </div>
+                <div class="nav-item">
+                    <i class='fas fa-sign-out-alt'></i>
+                    <a href="#">Sign Out</a>
                 </div>
             </div>
         </div>

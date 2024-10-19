@@ -21,7 +21,6 @@
                     <h4>Repsol Honda</h4>
                     <p class="about">Motorcycle Company </p>
                 </div>
-
                 <div class="filter">
                     <p class="filter-title">Job Preference :</p>
                     <div class="filter-container">
@@ -63,7 +62,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Main content -->
             <div class="main-content">
                 <h2>Available Job Listings</h2>
@@ -79,7 +77,6 @@
                         <p class="job-details">Promoted · Response time typically 5 days</p>
                     </div>
                 </div>
-
                 <div class="job-card-container">
                     <div class="job-card-icon">
                         <i class='fas fa-trash-alt'> </i>
@@ -91,7 +88,6 @@
                         <p class="job-details">Promoted · Response time typically 5 days</p>
                     </div>
                 </div>
-
                 <div class="job-card-container">
                     <div class="job-card-icon">
                         <i class='fas fa-trash-alt'> </i>
@@ -103,7 +99,6 @@
                         <p class="job-details">Promoted · Response time typically 5 days</p>
                     </div>
                 </div>
-
                 <div class="job-card-container">
                     <div class="job-card-icon">
                         <i class='fas fa-trash-alt'> </i>
@@ -115,7 +110,6 @@
                         <p class="job-details">Promoted · Response time typically 5 days</p>
                     </div>
                 </div>
-
                 <div class="job-card-container">
                     <div class="job-card-icon">
                         <i class='fas fa-trash-alt'> </i>
@@ -127,7 +121,6 @@
                         <p class="job-details">Promoted · Response time typically 5 days</p>
                     </div>
                 </div>
-
                 <div class="pagination">
                     <button id="prev-btn" class="pagination-button" disabled>
                         <i class="fas fa-angle-left"></i>
@@ -138,7 +131,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- add job -->
             <div class="add-jobs">
                 <button>Add Job</button>

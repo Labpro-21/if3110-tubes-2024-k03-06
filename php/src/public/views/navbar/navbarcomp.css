@@ -62,16 +62,16 @@ body {
     align-items: center;
     cursor: pointer;
 }
-.nav-item img {
-    width: 25px;
-    height: auto;
+.nav-item .fas {
+    font-size: 25px;
     margin-bottom: 5px;
+    color: #666666;
 }
-.nav-item:hover .change {
-    filter: brightness(0) invert(0); 
+.nav-item:hover .fas {
+    color: #0A66C2;
 }
 .nav-item:hover a {
-    color: black; 
+    color: #0A66C2; 
 }
 .nav-item a {
     text-decoration: none;
