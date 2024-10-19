@@ -4,14 +4,14 @@ $conn = $db->getConnection();
 $stmt = $conn->prepare("SELECT * FROM _lowongan");
 $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-$lowonganList = $stmt->fetchAll();  // Mengambil semua data dari query
+$lowonganList = $stmt->fetchAll(); 
 
 $db = Database::getInstance();
 $conn = $db->getConnection();
 $stmt = $conn->prepare("SELECT * FROM _lowongan");
 $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-$companynameList = $stmt->fetchAll();  // Mengambil semua data dari query
+$companynameList = $stmt->fetchAll();  
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +90,9 @@ $companynameList = $stmt->fetchAll();  // Mengambil semua data dari query
                 <?php foreach ($lowonganList as $lowongan): ?>
                     <div class="job-card">
                         <p class="job-title">
-                            <?php echo $lowongan['posisi']; ?>
+                            <a href="/lowongan?id=<?php echo $lowongan['lowongan_id'] ?>">
+                                <?php echo $lowongan['posisi']; ?>
+                            </a>
                         </p>
                         <p class="job-details">Location: 
                             <?php echo $lowongan['jenis_lokasi']; ?>

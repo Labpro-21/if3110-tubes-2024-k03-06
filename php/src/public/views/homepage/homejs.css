@@ -154,6 +154,15 @@ body {
     font-size: 20px;
 }
 
+.job-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.job-title a:hover {
+    text-decoration: underline;
+}
+
 .job-details {
     font-size: 14px;
     color: #666;

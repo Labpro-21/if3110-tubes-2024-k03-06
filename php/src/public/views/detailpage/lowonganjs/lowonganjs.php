@@ -1,8 +1,7 @@
 <?php
-$_SESSION['lowongan_id'] = 1;
 $db = Database::getInstance();
 $conn = $db->getConnection();
-$stmt = $conn->prepare("SELECT * FROM _lowongan WHERE lowongan_id = :low_id");
+$stmt = $conn->prepare("SELECT * FROM _lowongan l join _user u on l.company_id = u.user_id WHERE lowongan_id = :low_id");
 $stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
 $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -47,7 +46,9 @@ $lamaran = $stmt->fetch();
                 <div class="nama-pt">
                     <img src="public/assets/img/home.png" alt="PT Logo">
                     <h2>
-                        PT Ordivo Teknologi Indonesia
+                        <?php
+                        echo $lowongan['nama'];
+                        ?>
                     </h2>
                 </div>
                 <h3 class="posisi">
@@ -69,9 +70,12 @@ $lamaran = $stmt->fetch();
                 Status lamaran:' . $lamaran['status'] .
                         '</h4>';
                 } else {
-                    echo '<button class="lamar-button" id="lamar-button">
-                Lamar
-            </button>';
+                    echo '
+                    <a href="/lamar">
+                        <button class="lamar-button" id="lamar-button">
+                            Lamar
+                        </button>
+                    </a>';
                 }
                 ?>
             </div>
@@ -84,7 +88,6 @@ $lamaran = $stmt->fetch();
             </div>
         </div>
     </div>
-    <script src="public/views/detailpage/lowonganjs/lowonganjs.js"></script>
 </body>
 
 </html>

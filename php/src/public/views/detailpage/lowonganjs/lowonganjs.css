@@ -79,6 +79,10 @@
   background-color: #0a66c2 !important;
 }
 
+.detail_low button:hover {
+  background-color: #004080 !important; /* Warna hover yang berbeda */
+}
+
 @media (min-width: 768px) {
   *{
     background-color: #f5f5f5; 
