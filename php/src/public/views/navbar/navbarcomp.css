@@ -67,11 +67,14 @@ body {
     margin-bottom: 5px;
     color: #666666;
 }
-.nav-item:hover .fas {
+
+.nav-item-link:hover {
     color: #0A66C2;
 }
-.nav-item:hover a {
-    color: #0A66C2; 
+
+.nav-item-link:hover .nav-item .fas, 
+.nav-item-link:hover .nav-item span {
+    color: #0A66C2;
 }
 .nav-item a {
     text-decoration: none;

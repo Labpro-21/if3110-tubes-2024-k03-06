@@ -32,7 +32,7 @@
             <a class="nav-text" href="#">Me</a>
 
             <div class="dropdown-menu">
-                <a class="dropdown" href="#" id="signout">Sign Out</a>
+                <a class="dropdown" href="/signout" id="signout">Sign Out</a>
             </div>
         </div>
     </div>
