@@ -7,7 +7,7 @@ class HomeController extends Controller {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (isset($_SESSION["user_id"])) {
+        if (isset($_SESSION["user"])) {
             $this->load("homepage/homejs");
         } else {
             $this->load("login/login");
