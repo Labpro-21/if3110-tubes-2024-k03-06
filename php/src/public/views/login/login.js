@@ -1,58 +1,77 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = this.getElementById('login-form');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = this.getElementById("login-form");
 
-    form.addEventListener('submit', function(e) {
-        clearErrors();
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        let emailValid = validateEmail();
-        console.log(emailValid);
+    clearErrors();
 
-        if (!emailValid) {e.preventDefault()} else {
-            let passwordValid = validatePassword();
-            if (!passwordValid) {e.preventDefault();}
-        }
-    });
+    let emailValid = validateEmail();
+    let passwordValid = validatePassword();
+
+    if (emailValid && passwordValid) {
+      const formData = new FormData(form);
+      console.log(formData);
+
+      fetch("/login", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            window.location.href = "/home";
+          } else {
+            document.getElementById("loginError").textContent = data.message;
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  });
 });
 
 function validateEmail() {
-    const email = document.getElementById('email').value;
-    const emailError = document.getElementById('nameError');
-    const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const email = document.getElementById("email").value;
+  const emailError = document.getElementById("nameError");
+  const emailPattern =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (email.trim().length == 0) {
-      emailError.textContent = 'Email is required.';
-      document.getElementById('email').classList.add('invalid');
-      return false;
-    } else if (!emailPattern.test(email)) {
-      emailError.textContent = 'Invalid email format.';
-      document.getElementById('email').classList.add('invalid');
-      return false;
-    }
-
-    return true;
+  if (email.trim().length == 0) {
+    emailError.textContent = "Email is required.";
+    document.getElementById("email").classList.add("invalid");
+    return false;
+  } else if (!emailPattern.test(email)) {
+    emailError.textContent = "Invalid email format.";
+    document.getElementById("email").classList.add("invalid");
+    return false;
   }
 
-  function validatePassword() {
-    const password = document.getElementById('password').value;
-    const passwordError = document.getElementById('passwordError');
+  return true;
+}
 
-    if (password.trim().length == 0) {
-      passwordError.textContent = 'Password is required.';
-      document.getElementById('password').classList.add('invalid');
-      return false;
-    } else if (password.length < 6) {
-      passwordError.textContent = 'Password must be at least 6 characters.';
-      document.getElementById('password').classList.add('invalid');
-      return false;
-    }
+function validatePassword() {
+  const password = document.getElementById("password").value;
+  const passwordError = document.getElementById("passwordError");
 
-    return true;
+  if (password.trim().length == 0) {
+    passwordError.textContent = "Password is required.";
+    document.getElementById("password").classList.add("invalid");
+    return false;
+  } else if (password.length < 6) {
+    passwordError.textContent = "Password must be at least 6 characters.";
+    document.getElementById("password").classList.add("invalid");
+    return false;
   }
 
-  function clearErrors() {
-    const errorMessages = document.querySelectorAll('.error');
-    const invalidFields = document.querySelectorAll('.invalid');
+  return true;
+}
 
-    errorMessages.forEach(error => error.textContent = '');
-    invalidFields.forEach(field => field.classList.remove('invalid'));
-  }
+function clearErrors() {
+  const errorMessages = document.querySelectorAll(".error");
+  const invalidFields = document.querySelectorAll(".invalid");
+
+  errorMessages.forEach((error) => (error.textContent = ""));
+  invalidFields.forEach((field) => field.classList.remove("invalid"));
+}
