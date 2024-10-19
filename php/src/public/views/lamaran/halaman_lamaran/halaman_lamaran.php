@@ -1,3 +1,13 @@
+<?php
+$db = Database::getInstance();
+$conn = $db->getConnection();
+$stmt = $conn->prepare("SELECT * FROM _lowongan l join _user u on l.company_id = u.user_id WHERE lowongan_id = :low_id");
+$stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$lowongan = $stmt->fetch();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,26 +35,27 @@
         <div class="nama-pt">
             <img src="public/assets/img/home.png" alt="PT Logo">
             <h2>
-                PT Ordivo Teknologi Indonesia
+                <?php
+                echo $lowongan['nama'];
+                ?>
             </h2>
         </div>
-        <h2> Senior Full Stack Developer </h2>
+        <h2>
+            <?php
+            echo $lowongan['posisi'];
+            ?>
+        </h2>
         <div class="tipe-low">
             <img class="suitcase" src="public/assets/img/suitcase.png" alt="Suitcase">
             <h3>
-                Hybrid • Full-time
+                <?php 
+                echo $lowongan['jenis_lokasi'] . " • " . $lowongan['jenis_pekerjaan'];
+                ?>
             </h3>
         </div>
         <hr>
-        <?php if (isset($_GET['cv_error'])): ?>
-            <p style="color:red;"><?php echo $_GET['cv_error']; ?></p>
-        <?php endif; ?>
 
-        <?php if (isset($_GET['video_error'])): ?>
-            <p style="color:red;"><?php echo $_GET['video_error']; ?></p>
-        <?php endif; ?>
-
-        <form action="index.php?page=lamar-process" method="POST" enctype="multipart/form-data">
+        <form id="lamar-process" method="POST" enctype="multipart/form-data">
             <div class="upload-container">
                 <h3>Upload Your Curriculum Vitae (.pdf)<span class="wajib">*</span></h3>
                 <label for="cv-upload" class="custom-file-upload <?php if (isset($_GET['cv_error'])) echo 'error-border'; ?>">
@@ -62,9 +73,12 @@
                 </label>
                 <input id="video-upload" type="file" name="video" accept=".mp4" />
             </div>
+            <small id="lamarError" class="error"></small>
+            <br>
             <button type="submit" class="submit-application">SUBMIT APPLICATION</button>
         </form>
     </div>
+    <script src="/public/views/lamaran/halaman_lamaran/halaman_lamaran.js"></script>
 </body>
 
 </html>

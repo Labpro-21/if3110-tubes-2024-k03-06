@@ -109,6 +109,10 @@ input[type="file"] {
   border: 2px solid red;
 }
 
+#lamarError {
+  color: red;
+  font-size: 12px;
+}
 
 @media (min-width: 768px) {
   #desktop-navbar {
