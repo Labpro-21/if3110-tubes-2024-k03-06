@@ -11,8 +11,11 @@ class LowonganController extends Controller
         }
         if (isset($_GET['id'])) {
             $_SESSION['lowongan_id'] = $_GET['id'];
-            $this->load("detailpage/lowonganjs/lowonganjs");
+            if ($_SESSION['user']->role == 'company') {
+                $this->load("detailpage/lowongancomp/lowongancomp");
+            } else {
+                $this->load("detailpage/lowongan/lowonganjs");
+            }
         }
     }
 }
-?>
