@@ -1,5 +1,4 @@
 <?php
-
 include("core/Controller.php");
 
 class RegisterController extends Controller {
@@ -13,61 +12,40 @@ class RegisterController extends Controller {
             $this->load("register/register");
         }
     }
+
+    public function register() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Assuming you validate and sanitize inputs here
+            $email = $_POST['email'];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $role = $_POST['role'];
+            $name = $_POST['name'];
+            $location = $_POST['location'] ?? null;
+            $about = $_POST['about'] ?? null;
+
+            if (User::findByEmail($email)) {
+                echo json_encode(['success' => false, 'message' => 'Email is already used!']);
+                exit();
+            }
+
+            // Insert new user
+            if (USER::create($email, $password, $role, $name)) {
+                $userId = Database::getInstance()->getConnection()->lastInsertId();; // Get the new user ID
+                $companyModel = new Company();
+
+                if ($role === 'company') {
+                    if ($companyModel->create($userId, $location, $about)) {
+                        echo json_encode(['success' => true, 'message' => 'User registered successfully with company details']);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'User registered, but failed to create company details']);
+                    }
+                } else {
+                    echo json_encode(['success' => true, 'message' => 'User registered successfully']);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to register user']);
+            }
+            exit();
+        }
+    }
 }
-
-// include_once '../config/Database.php'; // Your DB connection
-
-// header('Content-Type: application/json'); // Return JSON response
-
-// $response = ['success' => false, 'message' => ''];
-// $db = new Database();
-// $conn = $db->getConnection();
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $role = $_POST['role'];
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-
-//     // Check if email is unique
-//     $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
-//     $stmt->bindParam(':email', $email);
-//     $stmt->execute();
-
-//     if ($stmt->rowCount() > 0) {
-//         $response['message'] = 'Email is already in use!';
-//         echo json_encode($response);
-//         exit;
-//     }
-
-//     // Hash the password
-//     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-//     // Insert data based on role
-//     if ($role === 'job_seeker') {
-//         $name = $_POST['name'];
-//         $sql = "INSERT INTO users (email, password, name, role) VALUES (:email, :password, :name, 'job_seeker')";
-//         $stmt = $conn->prepare($sql);
-//         $stmt->bindParam(':email', $email);
-//         $stmt->bindParam(':password', $hashed_password);
-//         $stmt->bindParam(':name', $name);
-//     } elseif ($role === 'company') {
-//         $company_name = $_POST['company_name'];
-//         $location = $_POST['location'];
-//         $about = $_POST['about'];
-//         $sql = "INSERT INTO users (email, password, company_name, location, about, role) VALUES (:email, :password, :company_name, :location, :about, 'company')";
-//         $stmt = $conn->prepare($sql);
-//         $stmt->bindParam(':email', $email);
-//         $stmt->bindParam(':password', $hashed_password);
-//         $stmt->bindParam(':company_name', $company_name);
-//         $stmt->bindParam(':location', $location);
-//         $stmt->bindParam(':about', $about);
-//     }
-
-//     if ($stmt->execute()) {
-//         $response['success'] = true;
-//     } else {
-//         $response['message'] = 'Registration failed. Try again!';
-//     }
-// }
-
-// echo json_encode($response);

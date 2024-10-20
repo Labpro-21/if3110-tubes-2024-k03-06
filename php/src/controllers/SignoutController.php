@@ -8,7 +8,7 @@ class SignoutController extends Controller
     {
         session_unset();
         session_destroy();
-        header("Location: /login");
+        header("Location: /index");
         exit();
     }
 }

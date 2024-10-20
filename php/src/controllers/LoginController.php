@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../models/User.php';
 include("core/Controller.php");
+require_once __DIR__ . '/../models/User.php';
 
 class LoginController extends Controller
 {
@@ -21,23 +21,17 @@ class LoginController extends Controller
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $db = Database::getInstance();
-            $conn = $db->getConnection();
-            $stmt = $conn->prepare("SELECT * FROM _user WHERE email = :email AND password = :password");
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $user = $stmt->fetch();
-            if ($user) {
-                $_SESSION['user'] = new User($user['user_id'], $user['role'], $user['nama']);
+            $user = User::findByEmail($email);
+
+            if ($user && $user->validatePassword($password)) {
+                $_SESSION['user'] = $user;
                 echo json_encode(['success' => true, 'message' => 'Login successful']);
             } else {
-                echo json_encode(['success' => false, 'message' => 'Invalid credentials']);
+                echo json_encode(['success' => false, 'message' => $user->password]);
             }
-            exit();
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid request']);
         }
+        exit();
     }
 }
