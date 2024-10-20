@@ -1,3 +1,14 @@
+<?php
+$db = Database::getInstance();
+$conn = $db->getConnection();
+$stmt = $conn->prepare("SELECT * FROM _lamaran JOIN _user ON _lamaran.user_id = _user.user_id WHERE lamaran_id = :lam_id");
+$stmt->bindParam(':lam_id', $_SESSION['lamaran_id']);
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$lamaran = $stmt->fetch();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,14 +36,14 @@
         <div class="detail-lamar">
             <form action="index.php?page=review-process" onsubmit="return confirmSubmit()">
                 <h3 id="details">
-                    Farhan's Application Details
+                    <?php echo $_SESSION['user']->nama ?>'s Application Details
                 </h3>
 
                 <!-- CV -->
                 <h3>
                     Curriculum Vitae:
                 </h3>
-                <iframe class="cv" src="public/data_lamaran/cv/test.pdf" width="auto" height="auto"></iframe>
+                <embed class="cv" src="<?php echo $lamaran['cv_path'] ?>" width="auto" height="auto"></embed>
                 <br>
 
                 <!-- Video Introduction -->
@@ -40,13 +51,13 @@
                     Video Introduction:
                 </h3>
                 <video width="100%" height="100%" controls>
-                    <source src="public/data_lamaran/video/test.mp4" type="video/mp4">
+                    <source src="<?php echo $lamaran['video_path'] ?>" type="video/mp4">
                 </video>
                 <br>
                 <br>
                 <!-- Status -->
                 <h3>
-                    Status : Waiting
+                    Status : <?php echo $lamaran['status'] ?>
                 </h3>
                 <br>
                 <!-- Reason -->
