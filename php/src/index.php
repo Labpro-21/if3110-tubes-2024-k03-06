@@ -2,6 +2,10 @@
 
 include("models/User.php");
 
+spl_autoload_register(function ($class_name) {
+    require_once __DIR__ . '/models/' . $class_name . '.php';
+});
+
 $uri_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $uri_path = filter_var($uri_path, FILTER_SANITIZE_URL);
 $path = explode('/', $uri_path);
@@ -28,35 +32,5 @@ if (file_exists($controller_path)) {
     }
 } else {
     // echo "Controller $controller not found";
-    header("Location: /home");
+    header("Location: /home"); // Sending user back to default
 }
-
-// spl_autoload_register(function ($class_name) {
-//     require_once __DIR__ . '/models/' . $class_name . '.php';
-// });
-
-// session_start();
-// require_once __DIR__ . '/controllers/LoginController.php';
-
-// $page = isset($_GET['page'])? $_GET['page'] : 'home';
-
-// switch ($page) {
-//     case 'login':
-//         require_once __DIR__ . '/public/views/login/login.php';
-//         break;
-
-//     case 'login-process':
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
-//             $email = $_POST['email'];
-//             $password = $_POST['password'];
-//             $loginController = new LoginController();
-//             $loginController->login($email, $password);
-//         } else {
-//             header("Location: index .php?page=login&error=Invalid request");
-//             exit();
-//         }
-//         break;
-
-//     case 'register':
-//         # code...
-//         break;

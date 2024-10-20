@@ -59,8 +59,8 @@ function validatePassword() {
     passwordError.textContent = "Password is required.";
     document.getElementById("password").classList.add("invalid");
     return false;
-  } else if (password.length < 6) {
-    passwordError.textContent = "Password must be at least 6 characters.";
+  } else if (password.length < 8 || password.length > 20) {
+    passwordError.textContent = "Password must be 8-20 characters!";
     document.getElementById("password").classList.add("invalid");
     return false;
   }

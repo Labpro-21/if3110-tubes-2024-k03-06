@@ -32,9 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     form.addEventListener('submit', function(event){
-        let role = roleInput.value;
+        event.preventDefault();
 
-        this.querySelectorAll('input, textarea').forEach(input => {
+        let role = roleInput.value;
+        this.querySelectorAll('select, input, textarea').forEach(input => {
             if (!input.closest('.hidden')) {
                 validateField({ target: input });
             }
@@ -42,8 +43,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (this.querySelector('.invalid')) {
             alert("Please correct the errors in the form before submitting.");
-            event.preventDefault();
+            return;
         }
+
+        const formData = new FormData(this);
+
+        fetch('/register/register', {
+            method : 'POST',
+            body : formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/home';
+            } else {
+                document.getElementById('emailError').textContent = data.message;
+                document.getElementById('email').classList.add('invalid');
+            }
+        })
+        .catch(error => console.error('Error:', error));
     });
 })
 
@@ -101,97 +119,3 @@ function validateEmail(email) {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
 }
-
-// document.getElementById('jobSeekerForm').addEventListener('submit', function(event) {
-//     event.preventDefault(); // Prevent page reload
-
-//     let name = document.getElementById('js-name').value;
-//     let email = document.getElementById('js-email').value;
-//     let password = document.getElementById('js-password').value;
-//     let confirmPassword = document.getElementById('js-confirm-password').value;
-//     let errorDiv = document.getElementById('js-error');
-
-//     // Basic validation
-//     if (password !== confirmPassword) {
-//         errorDiv.textContent = "Passwords do not match!";
-//         return;
-//         alert("passwword salah");
-//     } else {
-//         alert("berhasil login");
-//     }
-
-//     // Clear errors
-//     errorDiv.textContent = "";
-
-//     // Prepare data for AJAX request
-//     let formData = new FormData();
-//     formData.append('name', name);
-//     formData.append('email', email);
-//     formData.append('password', password);
-//     formData.append('role', 'job_seeker');
-
-//     // AJAX request
-//     fetch('../../controllers/RegisterController.php', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             window.location.href = 'home_jobseeker.php'; // Redirect on success
-//         } else {
-//             errorDiv.textContent = data.message; // Show error message
-//         }
-//     })
-//     .catch(error => {
-//         errorDiv.textContent = "Error occurred. Try again.";
-//     });
-// });
-
-// // Similar form submission for Company form
-// document.getElementById('companyForm').addEventListener('submit', function(event) {
-//     event.preventDefault(); // Prevent page reload
-
-//     let companyName = document.getElementById('co-name').value;
-//     let email = document.getElementById('co-email').value;
-//     let password = document.getElementById('co-password').value;
-//     let confirmPassword = document.getElementById('co-confirm-password').value;
-//     let location = document.getElementById('location').value;
-//     let about = document.getElementById('about').value;
-//     let errorDiv = document.getElementById('co-error');
-
-//     // Basic validation
-//     if (password !== confirmPassword) {
-//         errorDiv.textContent = "Passwords do not match!";
-//         return;
-//     }
-
-//     // Clear errors
-//     errorDiv.textContent = "";
-
-//     // Prepare data for AJAX request
-//     let formData = new FormData();
-//     formData.append('name', companyName);
-//     formData.append('email', email);
-//     formData.append('password', password);
-//     formData.append('location', location);
-//     formData.append('about', about);
-//     formData.append('role', 'company');
-
-//     // AJAX request
-//     fetch('../../controllers/RegisterController.php', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             window.location.href = 'home_company.php'; // Redirect on success
-//         } else {
-//             errorDiv.textContent = data.message; // Show error message
-//         }
-//     })
-//     .catch(error => {
-//         errorDiv.textContent = "Error occurred. Try again.";
-//     });
-// });
