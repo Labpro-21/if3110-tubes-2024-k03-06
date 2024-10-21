@@ -67,16 +67,20 @@ $lamaran = $stmt->fetch();
                 <?php
                 if ($lamaran) {
                     echo '<h4> Status Lamaran: ' . $lamaran['status'] . '</h4>';
-                    if($lamaran['status_reason'] !== ''){
+                    if ($lamaran['status_reason'] !== '') {
                         echo '<h4> Message: ' . $lamaran['status_reason'] . '</h4>';
                     }
                 } else {
-                    echo '
-                    <a href="/lamar">
-                        <button class="lamar-button" id="lamar-button">
-                            Lamar
-                        </button>
-                    </a>';
+                    if ($lowongan['is_open']) {
+                        echo
+                            '<a href="/lamar">
+                                <button class="lamar-button" id="lamar-button">
+                                    Lamar
+                                </button>
+                            </a>';
+                    } else {
+                        echo '<h4> Maaf Lowongan ini sudah ditutup </h4>';
+                    }
                 }
                 ?>
             </div>
