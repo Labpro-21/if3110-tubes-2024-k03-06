@@ -76,8 +76,7 @@
   text-align: left;
 }
 
-.close-lowongan,
-.delete-lowongan {
+.buttons {
   border: 1px solid #e0e0e0;
   width: auto;
   height: auto;
@@ -86,11 +85,12 @@
   color: white;
   font-size: 13px;
   font-weight: bold;
+  background-color: #0a66c2 !important;
+  cursor: pointer;
 }
 
-.close-lowongan,
-.delete-lowongan {
-  background-color: #0a66c2 !important;
+.buttons:hover {
+  background-color: #004080 !important;
 }
 
 @media (min-width: 768px) {

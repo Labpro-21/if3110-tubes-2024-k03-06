@@ -68,10 +68,16 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </h3>
                 </div>
                 <!-- Actions -->
-                <form method="POST">
-                    <button type="button" class="close-lowongan">Tutup Lowongan</button>
-                    <button type="button" class="delete-lowongan">Hapus Lowongan</button>
-                </form>
+                <?php
+                if ($lowongan['is_open']) {
+                    echo '<button type="button" class="buttons close-lowongan" data-id="' . $lowongan['lowongan_id'] . '">Tutup Lowongan</button>';
+                } else {
+                    echo '<button type="button" class="buttons open-lowongan" data-id="' . $lowongan['lowongan_id'] . '">Buka Lowongan</button>';
+                }
+                ?>
+
+                <button type="button" class="buttons delete-lowongan" data-id="<?php echo $lowongan['lowongan_id']; ?>">Hapus Lowongan</button>
+
             </div>
             <div class="right">
                 <p class="deskripsi">
@@ -98,6 +104,7 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+    <script src="./public/views/detailpage/lowongancomp/lowongancomp.js"></script>
 </body>
 
 </html>

@@ -19,14 +19,15 @@ class LowonganController extends Controller
             }
         }
     }
-  
-    public function fetchJobs() {
+
+    public function fetchJobs()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = 3;
             $offset = ($page - 1) * $limit;
-            
-            $sort = isset($_GET['job-sort']) ? $_GET['job-sort'] :'';
+
+            $sort = isset($_GET['job-sort']) ? $_GET['job-sort'] : '';
             $jobType = isset($_GET['job-type']) ? $_GET['job-type'] : '';
             $jobLocation = isset($_GET['job-location']) ? $_GET['job-location'] : '';
 
@@ -87,6 +88,100 @@ class LowonganController extends Controller
                 'totalPages' => $totalPages
             ]);
             exit();
+        }
+    }
+
+    public function openJob()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+
+            if (isset($input['low_id'])) {
+                $low_id = $input['low_id'];
+
+                try {
+                    $db = Database::getInstance();
+                    $conn = $db->getConnection();
+
+                    $stmt = $conn->prepare("UPDATE _lowongan SET is_open = true WHERE lowongan_id = :low_id");
+                    $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
+
+                    if ($stmt->execute()) {
+                        echo json_encode(['success' => true, 'message' => 'Pekerjaan berhasil dibuka.']);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Gagal membuka pekerjaan.']);
+                    }
+                } catch (Exception $e) {
+                    echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID pekerjaan tidak ditemukan.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Metode request tidak valid.']);
+        }
+    }
+
+    public function closeJob()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+
+            if (isset($input['low_id'])) {
+                $low_id = $input['low_id'];
+
+                try {
+                    $db = Database::getInstance();
+                    $conn = $db->getConnection();
+
+                    $stmt = $conn->prepare("UPDATE _lowongan SET is_open = false WHERE lowongan_id = :low_id");
+                    $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
+
+                    if ($stmt->execute()) {
+                        echo json_encode(['success' => true, 'message' => 'Pekerjaan berhasil ditutup.']);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Gagal menutup pekerjaan.']);
+                    }
+                } catch (Exception $e) {
+                    echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID pekerjaan tidak ditemukan.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Metode request tidak valid.']);
+        }
+    }
+
+
+    public function deleteJob()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+
+            if (isset($input['low_id'])) {
+                $low_id = $input['low_id'];
+
+                try {
+                    $db = Database::getInstance();
+                    $conn = $db->getConnection();
+
+                    $stmt = $conn->prepare("DELETE FROM _lowongan WHERE lowongan_id = :low_id");
+                    $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
+
+                    if ($stmt->execute()) {
+                        echo json_encode(['success' => true, 'message' => 'Pekerjaan berhasil dihapus.']);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Gagal menghapus pekerjaan.']);
+                    }
+                } catch (Exception $e) {
+                    echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID pekerjaan tidak ditemukan.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Metode request tidak valid.']);
         }
     }
 }
