@@ -1,21 +1,5 @@
-<?php
-// $db = Database::getInstance();
-// $conn = $db->getConnection();
-// $stmt = $conn->prepare("SELECT * FROM _lowongan");
-// $stmt->execute();
-// $stmt->setFetchMode(PDO::FETCH_ASSOC);
-// $lowonganList = $stmt->fetchAll(); 
-
-// $db = Database::getInstance();
-// $conn = $db->getConnection();
-// $stmt = $conn->prepare("SELECT * FROM _lowongan");
-// $stmt->execute();
-// $stmt->setFetchMode(PDO::FETCH_ASSOC);
-// $companynameList = $stmt->fetchAll();  
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

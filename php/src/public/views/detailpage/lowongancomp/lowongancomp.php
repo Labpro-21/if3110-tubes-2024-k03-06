@@ -1,5 +1,4 @@
 <?php
-$_SESSION['lowongan_id'] = 1;
 $db = Database::getInstance();
 $conn = $db->getConnection();
 $stmt = $conn->prepare("SELECT * FROM _lowongan WHERE lowongan_id = :low_id");
@@ -8,12 +7,15 @@ $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $lowongan = $stmt->fetch();
 
-$stmt = $conn->prepare("SELECT * FROM _lamaran WHERE lowongan_id = :low_id AND user_id = :userid");
+$stmt = $conn->prepare("
+    SELECT u.nama, l.status, l.lamaran_id 
+    FROM _lamaran l
+    JOIN _user u ON l.user_id = u.user_id
+    WHERE l.lowongan_id = :low_id
+");
 $stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
-$stmt->bindParam(':userid', $_SESSION['user']->id);
 $stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$lamaran = $stmt->fetch();
+$pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +49,9 @@ $lamaran = $stmt->fetch();
                 <div class="nama-pt">
                     <img src="public/assets/img/home.png" alt="PT Logo">
                     <h2>
-                        PT Ordivo Teknologi Indonesia
+                        <?php
+                        echo $_SESSION['user']->nama;
+                        ?>
                     </h2>
                 </div>
                 <h3 class="posisi">
@@ -75,7 +79,7 @@ $lamaran = $stmt->fetch();
                     echo $lowongan['deskripsi'];
                     ?>
                 </p>
-                
+
                 <h3>Daftar Pelamar</h3>
                 <table class="lamaran-table">
                     <tr>
@@ -83,21 +87,13 @@ $lamaran = $stmt->fetch();
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
-                    <tr>
-                        <td>Rizky Pratama</td>
-                        <td>Waiting</td>
-                        <td><a href="#">Lihat Detail</a></td>
-                    </tr>
-                    <tr>
-                        <td>Fajar Setiawan</td>
-                        <td>Accepted</td>
-                        <td><a href="#">Lihat Detail</a></td>
-                    </tr>
-                    <tr>
-                        <td>Adi Putra</td>
-                        <td>Rejected</td>
-                        <td><a href="#">Lihat Detail</a></td>
-                    </tr>
+                    <?php foreach ($pelamar as $row): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['nama']); ?></td>
+                            <td><?php echo htmlspecialchars($row['status']); ?></td>
+                            <td><a href="/detaillamaran?lamaran_id=<?php echo $row['lamaran_id']; ?>">Lihat Detail</a></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div>
