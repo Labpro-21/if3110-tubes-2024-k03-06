@@ -34,7 +34,7 @@ $lamaran = $stmt->fetch();
 
     <div class="container">
         <div class="detail-lamar">
-            <form action="index.php?page=review-process" onsubmit="return confirmSubmit()">
+            <form id="form-review">
                 <h3 id="details">
                     <?php echo $_SESSION['user']->nama ?>'s Application Details
                 </h3>
@@ -60,22 +60,24 @@ $lamaran = $stmt->fetch();
                     Status : <?php echo $lamaran['status'] ?>
                 </h3>
                 <br>
-                <!-- Reason -->
+                    <?php
+                    if ($lamaran['status'] === 'waiting') {
+                        echo '
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="4" cols="50"></textarea>
                 <br>
                 <br>
 
-                <!-- Final Review -->
                 <label for="status">Final Review:</label>
                 <select id="status" name="status">
                     <option value="accepted">Accepted</option>
                     <option value="rejected">Rejected</option>
                 </select>
-                <br>
-                <!-- Button -->
-                <button type="submit" class="submit-application">Finish Review Application</button>
-            </form>
+                <br>';
+                        echo '<button type="submit" class="submit-application">Finish Review Application</button>';
+                    }
+                    ?>
+                    </form>
         </div>
     </div>
 
