@@ -32,7 +32,7 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Desktop Navbar -->
     <?php
     echo '<div id="desktop-navbar">';
-    include_once __DIR__ . '/../../navbar/navbarjs.php';
+    include_once __DIR__ . '/../../navbar/navbarcomp.php';
     echo '</div>';
     ?>
 
