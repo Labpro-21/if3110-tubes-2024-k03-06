@@ -1,0 +1,33 @@
+body {
+    background-color: #ffffff;
+    font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+.header-content {
+    padding-top: 25px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1500px;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+    padding: 0 200px 0 100px;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
