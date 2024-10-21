@@ -22,8 +22,10 @@
                     <img src="./public/assets/img/photo.jpeg">
                 </div>
                 <div class="profile-info">
-                    <h4>Mohammad Andhika Fadillah</h4>
-                    <p class="about">Undergraduate Student at Bandung Institute Of Technology </p>
+                    <h4>
+                        <?php echo $_SESSION['user']->nama; ?>
+                    </h4>
+                    <!-- <p class="about">Undergraduate Student at Bandung Institute Of Technology </p> -->
                 </div>
 
                 <div class="filter">
