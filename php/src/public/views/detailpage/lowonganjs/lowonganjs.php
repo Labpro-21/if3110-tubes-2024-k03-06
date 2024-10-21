@@ -66,9 +66,10 @@ $lamaran = $stmt->fetch();
                 </div>
                 <?php
                 if ($lamaran) {
-                    echo '<h4>
-                Status lamaran:' . $lamaran['status'] .
-                        '</h4>';
+                    echo '<h4> Status Lamaran: ' . $lamaran['status'] . '</h4>';
+                    if($lamaran['status_reason'] !== ''){
+                        echo '<h4> Message: ' . $lamaran['status_reason'] . '</h4>';
+                    }
                 } else {
                     echo '
                     <a href="/lamar">
