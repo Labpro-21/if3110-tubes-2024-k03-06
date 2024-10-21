@@ -17,6 +17,9 @@ $lamaran = $stmt->fetch();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/public/views/lamaran/detail_lamaran/detail_lamaran.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
 </head>
 
 <body>
@@ -60,11 +63,11 @@ $lamaran = $stmt->fetch();
                     Status : <?php echo $lamaran['status'] ?>
                 </h3>
                 <br>
-                    <?php
-                    if ($lamaran['status'] === 'waiting') {
-                        echo '
+                <?php
+                if ($lamaran['status'] === 'waiting') {
+                    echo '
                 <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" cols="50"></textarea>
+                <div id="editor" style="height: 200px;"></div>
                 <br>
                 <br>
 
@@ -74,10 +77,10 @@ $lamaran = $stmt->fetch();
                     <option value="rejected">Rejected</option>
                 </select>
                 <br>';
-                        echo '<button type="submit" class="submit-application">Finish Review Application</button>';
-                    }
-                    ?>
-                    </form>
+                    echo '<button type="submit" class="submit-application">Finish Review Application</button>';
+                }
+                ?>
+            </form>
         </div>
     </div>
 
