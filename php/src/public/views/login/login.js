@@ -11,23 +11,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (emailValid && passwordValid) {
       const formData = new FormData(form);
-      console.log(formData);
 
-      fetch("/login/login", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            window.location.href = "/home";
+      const xhr = new XMLHttpRequest();
+
+      xhr.open("POST", "/login/login", true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            try {
+              const data = JSON.parse(xhr.responseText);
+              if (data.success) {
+                window.location.href = "/home";
+              } else {
+                document.getElementById("loginError").textContent =
+                  data.message;
+              }
+            } catch (error) {
+              console.error("Error parsing JSON:", error);
+              document.getElementById("loginError").textContent =
+                "Error processing the response.";
+            }
           } else {
-            document.getElementById("loginError").textContent = data.message;
+            document.getElementById("loginError").textContent =
+              "Failed to login. Please try again.";
           }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+        }
+      };
+
+      xhr.send(formData);
     }
   });
 });

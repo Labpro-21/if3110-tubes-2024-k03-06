@@ -57,23 +57,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function handleSubmit(form) {
         const formData = new FormData(form);
-        fetch("/upload", {
-            method: "POST",
-            body: formData,
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                window.location.href = "/lowongan?id=" + data.id;
-            } else {
-                showError(data.message);
+        
+        const xhr = new XMLHttpRequest();
+    
+        xhr.open("POST", "/lamar/lamarlowongan", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        if (data.success) {
+                            window.location.href = "/lowongan?id=" + data.id;
+                        } else {
+                            showError(data.message);
+                        }
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                        console.log(xhr.responseText);
+                        showError("Terjadi kesalahan saat memproses respons dari server.");
+                    }
+                } else {
+                    showError("Terjadi kesalahan saat mengunggah data.");
+                }
             }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            showError("Terjadi kesalahan saat mengunggah data.");
-        });
+        };
+    
+        xhr.send(formData);
     }
+    
 
     // Reset error
     cvInput.addEventListener("change", function () {

@@ -52,4 +52,14 @@ class Company
         $stmt->bindParam(':lamaran_id', $lamaran_id);
         return ($stmt->execute());
     }
+
+    public function lemarLowongan($user_id, $targetFileCV, $video_path)
+    {
+        $stmt = $this->db->prepare("INSERT INTO _lamaran (lowongan_id, user_id, cv_path, video_path, status, created_at) VALUES (:low_id, :user_id, :cv, :video, 'waiting', NOW())");
+        $stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':cv', $targetFileCV);
+        $stmt->bindParam(':video', $video_path);
+        $stmt->execute();
+    }
 }
