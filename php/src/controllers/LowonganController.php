@@ -15,7 +15,7 @@ class LowonganController extends Controller
             if ($_SESSION['user']->role == 'company') {
                 $this->load("detailpage/lowongancomp/lowongancomp");
             } else {
-                $this->load("detailpage/lowongan/lowonganjs");
+                $this->load("detailpage/lowonganjs/lowonganjs");
             }
         }
     }
