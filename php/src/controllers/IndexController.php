@@ -10,6 +10,7 @@ class IndexController extends Controller {
         if (isset($_SESSION['user'])) {
             header("Location: /home");
         } else {
+            $this->load("indexheader/indexheader");
             $this->load("index/index");
         }
     }

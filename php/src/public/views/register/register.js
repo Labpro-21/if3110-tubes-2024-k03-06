@@ -48,20 +48,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const formData = new FormData(this);
 
-        fetch('/register/register', {
-            method : 'POST',
-            body : formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = '/home';
-            } else {
-                document.getElementById('emailError').textContent = data.message;
-                document.getElementById('email').classList.add('invalid');
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/register/register', true);
+        
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    if (data.success) {
+                        window.location.href = '/home';
+                    } else {
+                        document.getElementById('emailError').textContent = data.message;
+                        document.getElementById('email').classList.add('invalid');
+                    }
+                } else {
+                    console.error('Request failed with status:', xhr.status);
+                }
             }
-        })
-        .catch(error => console.error('Error:', error));
+        };
+        
+        xhr.send(formData);
     });
 })
 

@@ -1,17 +1,17 @@
 <?php
-$db = Database::getInstance();
-$conn = $db->getConnection();
-$stmt = $conn->prepare("SELECT * FROM _lowongan");
-$stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$lowonganList = $stmt->fetchAll(); 
+// $db = Database::getInstance();
+// $conn = $db->getConnection();
+// $stmt = $conn->prepare("SELECT * FROM _lowongan");
+// $stmt->execute();
+// $stmt->setFetchMode(PDO::FETCH_ASSOC);
+// $lowonganList = $stmt->fetchAll(); 
 
-$db = Database::getInstance();
-$conn = $db->getConnection();
-$stmt = $conn->prepare("SELECT * FROM _lowongan");
-$stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$companynameList = $stmt->fetchAll();  
+// $db = Database::getInstance();
+// $conn = $db->getConnection();
+// $stmt = $conn->prepare("SELECT * FROM _lowongan");
+// $stmt->execute();
+// $stmt->setFetchMode(PDO::FETCH_ASSOC);
+// $companynameList = $stmt->fetchAll();  
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +21,7 @@ $companynameList = $stmt->fetchAll();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="./public/views/homepage/homejs.css">
+        <script defer src="/public/views/homepage/homejs.js"></script>
     </head>
     <body>
         <div class="navbar">
@@ -47,29 +48,29 @@ $companynameList = $stmt->fetchAll();
                         <div class="filter-section">
                             <p class="filter-section-title">Time</p>
                             <div class="filter-group">
-                                <select id="job-type">
-                                    <option value="...">...</option>
-                                    <option value="newest">newest</option>
-                                    <option value="oldest">oldest</option>
+                                <select id="job-sort" name="job-sort">
+                                    <option value="">...</option>
+                                    <option value="DESC">newest</option>
+                                    <option value="ASC">oldest</option>
                                 </select>
                             </div>
                         </div>
                         <div class="filter-section">
                         <p class="filter-section-title">Job Type</p>
                             <div class="filter-group">
-                                <select id="job-type">
-                                    <option value="...">...</option>
-                                    <option value="full-time">Full-time</option>
-                                    <option value="part-time">Part-time</option>
-                                    <option value="contract">Contract</option>
+                                <select id="job-type" name="job-type">
+                                    <option value="">...</option>
+                                    <option value="Full-time">Full-time</option>
+                                    <option value="Part-time">Part-time</option>
+                                    <option value="Contract">Contract</option>
                                 </select>
                             </div>
                         </div>
                         <div class="filter-section">
                         <p class="filter-section-title">Job Location</p>
                             <div class="filter-group">
-                                <select id="job-type">
-                                    <option value="...">...</option>
+                                <select id="job-location" name="job-location">
+                                    <option value="">...</option>
                                     <option value="hybrid">hybrid</option>
                                     <option value="on-site">on-site</option>
                                     <option value="remote">remote</option>
@@ -87,21 +88,9 @@ $companynameList = $stmt->fetchAll();
             <div class="main-content">
                 <h2>Top job picks for you</h2>
                 <p class="main-content-text">Based on your profile, preferences, and activity like applies, searches, and saves</p>
-                <?php foreach ($lowonganList as $lowongan): ?>
-                    <div class="job-card">
-                        <p class="job-title">
-                            <a href="/lowongan?id=<?php echo $lowongan['lowongan_id'] ?>">
-                                <?php echo $lowongan['posisi']; ?>
-                            </a>
-                        </p>
-                        <p class="job-details">Location: 
-                            <?php echo $lowongan['jenis_lokasi']; ?>
-                        </p>
-                        <p class="job-details">Job Type: 
-                            <?php echo $lowongan['jenis_pekerjaan']; ?>
-                        </p>
-                    </div>
-                <?php endforeach; ?>
+                <div class="joblist">
+
+                </div>
                 <!-- Akhir perulangan -->
                 <div class="pagination">
                     <button id="prev-btn" class="pagination-button" disabled>
@@ -128,6 +117,5 @@ $companynameList = $stmt->fetchAll();
                 </div>
             </div>
         </div>
-        <script src="./public/views/homepage/homejs.js"></script>
     </body>
 </html>

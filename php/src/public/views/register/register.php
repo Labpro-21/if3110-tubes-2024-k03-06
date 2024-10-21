@@ -14,11 +14,6 @@
 </head>
 <body>
 
-<header>
-    <!-- <a href="../../../index.php"><img class="logo" src="../../assets/img/linkinPurry-Whole.png" alt="LinkinPurry logo"></a> -->
-     <p>template</p>
-</header>
-
 <h1 class="main-sub">
     Make the most of your professional life
 </h1>
