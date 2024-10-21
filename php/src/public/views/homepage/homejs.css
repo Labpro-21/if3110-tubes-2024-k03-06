@@ -20,14 +20,14 @@ body {
 }
 
 .sidebar {
-    width: 22%;
+    width: 15%;
     position: fixed;
     padding-top: 2rem;
     padding: 0;
     left: 50px;
     display: flex;
     flex-direction: column;
-    height: 70vh;
+    height: 35%;
 }
 
 .home-picture{
@@ -123,7 +123,7 @@ body {
     margin-right: 5px;
 }
 .main-content {
-    margin-left: calc(20% + 80px);
+    margin-left: 19%;
     height: 95vh;
     width: 50%;
 }
@@ -134,9 +134,9 @@ body {
 }
 
 .guidance {
-    height: 40vh;
+    height: 10%;
     width: 25%;
-    margin-left: 27px;
+    margin-left: 19px;
 }
 
 .job-card {
