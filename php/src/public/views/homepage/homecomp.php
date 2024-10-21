@@ -95,7 +95,7 @@ $company = $stmt->fetch();
             <?php foreach ($lowonganList as $lowongan): ?>
                 <div class="job-card-container">
                     <div class="job-card-icon">
-                        <i class='fas fa-trash-alt'> </i>
+                        <i class="fas fa-trash-alt" data-id="<?php echo $lowongan['lowongan_id']; ?>"></i>
                         <i class='far fa-edit'> </i>
                     </div>
                     <div class="job-card">
