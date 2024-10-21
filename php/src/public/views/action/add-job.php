@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="./public/views/lowonganhehe/add-job.css">
+        <link rel="stylesheet" href="./public/views/action/add-job.css">
     </head>
     <body>
         <div class="navbar">
@@ -68,6 +68,13 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="upload-image">
+                            <p class="add-job-section-title">Upload Job Image:</p>
+                            <label for="job-image" class="custom-file-upload">Choose File</label>
+                            <input type="file" id="job-image" accept="image/*" style="display: none;">
+                            <span id="file-chosen">No file chosen</span>
                         </div>
 
                         <div class="add-button">
