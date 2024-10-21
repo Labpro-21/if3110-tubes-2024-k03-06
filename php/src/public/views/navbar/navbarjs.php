@@ -21,7 +21,7 @@
     <div class="navbar-right">
         <div class="nav-item">
             <i class="fas fa-home"></i>
-            <a class="nav-text" href="#">Home</a>
+            <a class="nav-text" href="/home">Home</a>
         </div>
         <div class="nav-item">
             <i class='fas fa-briefcase'></i>

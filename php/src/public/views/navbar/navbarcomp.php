@@ -23,7 +23,7 @@
         <div class="navbar-right">
             <div class="nav-item">
                 <i class="fas fa-home"></i>
-                <a href="#">Home</a>
+                <a href="/home">Home</a>
             </div>
             <div class="nav-item">
                 <i class='fas fa-briefcase'></i>
