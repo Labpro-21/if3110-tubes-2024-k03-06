@@ -2,6 +2,7 @@
 
 include("core/Controller.php");
 include_once("config/Database.php");
+require_once __DIR__ . '/../models/Company.php';
 
 class LowonganController extends Controller
 {
@@ -102,14 +103,83 @@ class LowonganController extends Controller
         }
     }
 
+    public function toAddJob()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION["user"])) {
+            $this->load("action/add-job");
+        } else {
+            $this->load("login/login");
+        }
+    }
+
+    public function addJob()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $type = $_POST['type'];
+            $location = $_POST['location'];
+
+            $targetDir = "public/uploads/job_images/";
+
+            // Buat direktori jika belum ada
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
+
+            if (isset($_FILES['image']) && $_FILES['image']['error'][0] == UPLOAD_ERR_OK) {
+                $imagePaths = [];
+
+                foreach ($_FILES['image']['name'] as $key => $imageNameOriginal) {
+                    $imageFileType = strtolower(pathinfo($imageNameOriginal, PATHINFO_EXTENSION));
+
+                    // Buat nama file unik
+                    $imageName = uniqid(md5(time() . '_' . bin2hex(random_bytes(5))), true) . '.' . $imageFileType;
+                    $targetFile = $targetDir . $imageName;
+
+                    // Validasi jenis file gambar
+                    if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+                        echo json_encode(['success' => false, 'message' => 'Format gambar tidak valid. Hanya JPG, JPEG, PNG, dan GIF yang diperbolehkan.']);
+                        exit();
+                    }
+
+                    // Pindahkan file gambar ke direktori tujuan
+                    if (!move_uploaded_file($_FILES['image']['tmp_name'][$key], $targetFile)) {
+                        echo json_encode(['success' => false, 'message' => 'Gagal mengunggah gambar pekerjaan.']);
+                        exit();
+                    }
+
+                    $imagePaths[] = $targetFile;
+                }
+
+                try {
+                    $company = new Company();
+                    if ($company->addLowongan($title, $description, $type, $location, $imagePaths)) {
+                        echo json_encode(['success' => true, 'message' => 'Lowongan berhasil ditambahkan.']);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Gagal menambahkan lowongan.']);
+                    }
+                } catch (PDOException $e) {
+                    echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+                }
+                exit();
+            }
+        }
+    }
+    
     public function toEditJob()
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
         if (isset($_SESSION["user"])) {
-            if(isset($_GET["id"]))
-            {
+            if (isset($_GET["id"])) {
                 $_SESSION["lowongan_id"] = $_GET["id"];
             }
             $this->load("action/update-job");
