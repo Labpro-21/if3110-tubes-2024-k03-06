@@ -96,7 +96,7 @@ $company = $stmt->fetch();
                 <div class="job-card-container">
                     <div class="job-card-icon">
                         <i class="fas fa-trash-alt" data-id="<?php echo $lowongan['lowongan_id']; ?>"></i>
-                        <i class='far fa-edit'> </i>
+                        <i class='far fa-edit' data-id="<?php echo $lowongan['lowongan_id']; ?>"> </i>
                     </div>
                     <div class="job-card">
                         <p class="job-title">
