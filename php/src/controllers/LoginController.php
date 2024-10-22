@@ -27,7 +27,7 @@ class LoginController extends Controller
                 $_SESSION['user'] = $user;
                 echo json_encode(['success' => true, 'message' => 'Login successful']);
             } else {
-                echo json_encode(['success' => false, 'message' => $user->password]);
+                echo json_encode(['success' => false, 'message' => 'Wrong password']);
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid request']);

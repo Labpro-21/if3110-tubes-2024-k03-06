@@ -35,11 +35,13 @@ class RegisterController extends Controller {
 
                 if ($role === 'company') {
                     if ($companyModel->create($userId, $location, $about)) {
+                        $_SESSION['user'] = User::findByEmail($email);
                         echo json_encode(['success' => true, 'message' => 'User registered successfully with company details']);
                     } else {
                         echo json_encode(['success' => false, 'message' => 'User registered, but failed to create company details']);
                     }
                 } else {
+                    $_SESSION['user'] = User::findByEmail($email);
                     echo json_encode(['success' => true, 'message' => 'User registered successfully']);
                 }
             } else {
