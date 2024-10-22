@@ -23,6 +23,7 @@ $lamaran = $stmt->fetch();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Lowongan</title>
     <link rel="stylesheet" href="public/views/detailpage/lowonganjs/lowonganjs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -44,7 +45,7 @@ $lamaran = $stmt->fetch();
         <div class="detail_low">
             <div class="left">
                 <div class="nama-pt">
-                    <img src="public/assets/img/home.png" alt="PT Logo">
+                    <i class="fas fa-building"></i>
                     <h2>
                         <?php
                         echo $lowongan['nama'];
@@ -66,14 +67,21 @@ $lamaran = $stmt->fetch();
                 </div>
                 <?php
                 if ($lamaran) {
+                    echo '<a href="' . $lamaran['cv_path'] . '"> Link To Your CV </a>';
+                    if ($lamaran['video_path'] !== '') {
+                        echo '<a href="' . $lamaran['video_path'] . '"> Link To Your Video </a>';
+                    }
                     echo '<h4> Status Lamaran: ' . $lamaran['status'] . '</h4>';
                     if ($lamaran['status_reason'] !== '') {
-                        echo '<h4> Message: ' . $lamaran['status_reason'] . '</h4>';
+                        echo '<h4> Message:</h4>';
+                        echo '<div class="message">';
+                        echo $lamaran['status_reason'];
+                        echo '</div>';
                     }
                 } else {
                     if ($lowongan['is_open']) {
                         echo
-                            '<a href="/lamar">
+                        '<a href="/lamar">
                                 <button class="lamar-button" id="lamar-button">
                                     Lamar
                                 </button>
