@@ -26,6 +26,7 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Lowongan</title>
     <link rel="stylesheet" href="public/views/detailpage/lowongancomp/lowongancomp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -47,12 +48,15 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="detail_low">
             <div class="left">
                 <div class="nama-pt">
-                    <img src="public/assets/img/home.png" alt="PT Logo">
+                    <i class="fas fa-building"></i>
                     <h2>
                         <?php
                         echo $_SESSION['user']->nama;
                         ?>
                     </h2>
+                    <a href="/lowongan/toEditJob">
+                        <i class='far fa-edit'> </i>
+                    </a>
                 </div>
                 <h3 class="posisi">
                     <?php

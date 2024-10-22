@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (userConfirmed) {
         const status = document.getElementById("status").value;
-        const message = editorContainer ? quill.getText().trim() : '';
+        const message = quill.root.innerHTML;
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "/lamar/review", true);
         xhr.setRequestHeader(

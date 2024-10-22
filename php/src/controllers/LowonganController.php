@@ -91,6 +91,22 @@ class LowonganController extends Controller
         }
     }
 
+    public function toEditJob()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION["user"])) {
+            if(isset($_GET["id"]))
+            {
+                $_SESSION["lowongan_id"] = $_GET["id"];
+            }
+            $this->load("action/update-job");
+        } else {
+            $this->load("login/login");
+        }
+    }
+
     public function openJob()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

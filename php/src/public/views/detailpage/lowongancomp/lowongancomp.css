@@ -41,6 +41,18 @@
   font-size: 25px;
 }
 
+.nama-pt a{
+  color: inherit;
+}
+.nama-pt i{
+  color: inherit;
+  cursor:pointer;
+}
+
+.nama-pt i:hover {
+  color:#0a66c2;
+}
+
 .posisi {
   font-size: 20px;
   text-align: left;
