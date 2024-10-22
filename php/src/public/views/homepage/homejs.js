@@ -21,7 +21,6 @@ function fetchJobs() {
     xhr.open('GET', `/lowongan/fetchJobs?page=${currentPage}&job-sort=${currentJobSort}&job-type=${currentJobType}&job-location=${currentJobLocation}`, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            console.log(xhr.responseText);
             const response = JSON.parse(xhr.responseText);
             totalPages = response.totalPages;
 
@@ -37,8 +36,10 @@ function fetchJobs() {
                             ${lowongan.posisi}
                         </a>
                     </p>
+                    <p>${lowongan.nama}</p>
                     <p class="job-details">Location: ${lowongan.jenis_lokasi}</p>
                     <p class="job-details">Job Type: ${lowongan.jenis_pekerjaan}</p>
+                    <p class="job-details">Last updated: ${lowongan.updated_at}</p>
                 `;
                 jobCardsContainer.appendChild(jobCard);
             });
