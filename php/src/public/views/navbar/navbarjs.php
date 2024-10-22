@@ -1,3 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +14,13 @@
     <link rel="stylesheet" href="/public/views/navbar/navbarjs.css">
 </head>
 <body>
-
 <div class="navbar">
     <div class="navbar-left">
         <i class='fab'>&#xf08c;</i>
-        <div class="search-bar">
+        <form class="search-bar" action="/home" method="GET">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Title, skill or company">
-        </div>
+            <input type="text" id="search-bar" name="search" placeholder="Title, skill or company">
+        </form>
     </div>
 
     <div class="navbar-right">

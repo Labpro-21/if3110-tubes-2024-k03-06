@@ -12,7 +12,6 @@ body {
 }
 
 .hero-section {
-    margin-top: 2%;
     max-width: 100%;
     overflow: hidden;
     display: flex;
@@ -46,6 +45,7 @@ body {
     text-decoration-line: none;
     min-height: 30px;
     height: min-content;
+    max-width: 400px;
     display: block;
     margin-top: 24px;
     border-radius: 48px;

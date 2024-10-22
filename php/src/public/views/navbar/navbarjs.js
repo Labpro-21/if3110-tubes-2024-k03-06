@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const dropdownMenu = profileNav.querySelector(".dropdown-menu");
 
     // Event listener untuk mengklik gambar
-    profileNav.querySelector("img").addEventListener("click", function(event) {
+    profileNav.addEventListener("click", function(event) {
         // Toggle dropdown visibility
         dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
         event.stopPropagation(); // Stop click propagation
