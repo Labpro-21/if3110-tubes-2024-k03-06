@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f2ef;    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    margin-top: 5rem;
+    width: 50%;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.update-profile-form {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 40px;
+    width: 400px;
+    max-width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.back-button i {
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+}
+
+.update-profile-container {
+    margin-top: 20px;
+}
+
+.company-title, .company-description, .company-location {
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-box:focus {
+    border-color: #3f51b5;
+    outline: none;
+}
+
+.dragdown-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.update-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.update-button button {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.update-button button:hover {
+    background-color: #303f9f;
+}
+
+@media (max-width: 480px) {
+
+    .container{
+        width: 100%;
+    }
+    .update-profile-form {
+        padding: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
