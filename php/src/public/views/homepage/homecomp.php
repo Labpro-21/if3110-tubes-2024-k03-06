@@ -125,7 +125,7 @@ $company = $stmt->fetch();
         </div>
         <!-- add job -->
         <div class="add-jobs">
-            <button>Add Job</button>
+            <button id="add-job">Add Job</button>
         </div>
     </div>
     <script src="./public/views/homepage/homecomp.js"></script>

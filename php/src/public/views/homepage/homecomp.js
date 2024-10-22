@@ -115,6 +115,12 @@ document.querySelectorAll(".fa-trash-alt").forEach(function (element) {
 document.querySelectorAll(".fa-edit").forEach(function (element) {
   element.addEventListener("click", function () {
     var lowonganId = this.getAttribute("data-id");
-    window.location.href = '/lowongan/toEditJob?id='+ lowonganId;
+    window.location.href = "/lowongan/toEditJob?id=" + lowonganId;
   });
+});
+
+const button = document.getElementById("add-job");
+
+button.addEventListener("click", function () {
+  window.location.href = "/lowongan/toAddJob";
 });
