@@ -30,6 +30,7 @@ class LowonganController extends Controller
             $sort = isset($_GET['job-sort']) ? $_GET['job-sort'] : '';
             $jobType = isset($_GET['job-type']) ? $_GET['job-type'] : '';
             $jobLocation = isset($_GET['job-location']) ? $_GET['job-location'] : '';
+            $search = isset($_GET['search']) ? $_GET['search'] :'';
 
             // Where 1 = 1 is used to enable appending filters
             $baseQuery = " FROM _lowongan lo JOIN (SELECT user_id, nama FROM _user WHERE role = 'company') us ON lo.company_id = us.user_id WHERE 1=1";
@@ -40,6 +41,11 @@ class LowonganController extends Controller
             }
             if ($jobLocation) {
                 $baseQuery .= " AND jenis_lokasi = :jobLocation";
+            }
+
+            // Search
+            if ($search) {
+                $baseQuery .= " AND posisi ILIKE :search";
             }
 
             // Query to fetch jobs with LIMIT and OFFSET
@@ -63,7 +69,7 @@ class LowonganController extends Controller
             // Prepare the count query
             $stmtCount = $conn->prepare($countQuery);
 
-            // Bind filter parameters to both queries
+            // Bind parameters to both queries
             if ($jobType) {
                 $stmtJob->bindParam(':jobType', $jobType);
                 $stmtCount->bindParam(':jobType', $jobType);
@@ -71,6 +77,11 @@ class LowonganController extends Controller
             if ($jobLocation) {
                 $stmtJob->bindParam(':jobLocation', $jobLocation);
                 $stmtCount->bindParam(':jobLocation', $jobLocation);
+            }
+            if ($search) {
+                $searchParam = '%' . $search . '%';
+                $stmtJob->bindParam(':search', $searchParam);
+                $stmtCount->bindParam(':search', $searchParam);
             }
 
             // Execute both queries

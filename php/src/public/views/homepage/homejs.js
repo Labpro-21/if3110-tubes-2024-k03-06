@@ -9,6 +9,9 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const pageButtonsContainer = document.getElementById('page-buttons');
 
+const urlParams = new URLSearchParams(window.location.search);
+const searchValue = urlParams.get('search') || '';
+
 let currentPage = 1;
 let totalPages = 0;
 let currentJobSort = jobSortSelect.value;
@@ -18,7 +21,7 @@ let currentJobLocation = jobLocationSelect.value;
 function fetchJobs() {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `/lowongan/fetchJobs?page=${currentPage}&job-sort=${currentJobSort}&job-type=${currentJobType}&job-location=${currentJobLocation}`, true);
+    xhr.open('GET', `/lowongan/fetchJobs?search=${searchValue}&page=${currentPage}&job-sort=${currentJobSort}&job-type=${currentJobType}&job-location=${currentJobLocation}`, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
