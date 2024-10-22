@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="./public/views/action/update-job.css">
+        <link rel="stylesheet" href="/public/views/action/update-job.css">
     </head>
     <body>
         <div class="navbar">
@@ -15,10 +15,10 @@
              <!-- Sidebar -->
             <div class="sidebar">
                 <div class="home-picture">
-                    <img src="./public/assets/img/itb.jpeg">
+                    <img src="/public/assets/img/itb.jpeg">
                 </div>
                 <div class="profile-picture">
-                    <img src="./public/assets/img/photo.jpeg">
+                    <img src="/public/assets/img/photo.jpeg">
                 </div>
                 <div class="profile-info">
                     <h4>Repsol Honda</h4>
