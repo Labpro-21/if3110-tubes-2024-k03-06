@@ -30,6 +30,7 @@ div {
     width: 352px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 24px;
+    padding-top: 12px;
     border-radius: 8px;
     margin: 0 auto;
     margin-top: 50px;
@@ -95,6 +96,7 @@ div {
 .button-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .button-container button {

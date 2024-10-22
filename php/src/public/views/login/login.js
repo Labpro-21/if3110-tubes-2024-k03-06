@@ -86,4 +86,5 @@ function clearErrors() {
 
   errorMessages.forEach((error) => (error.textContent = ""));
   invalidFields.forEach((field) => field.classList.remove("invalid"));
+  document.getElementById("loginError").textContent = '';
 }

@@ -32,7 +32,7 @@ class LowonganController extends Controller
             $jobLocation = isset($_GET['job-location']) ? $_GET['job-location'] : '';
 
             // Where 1 = 1 is used to enable appending filters
-            $baseQuery = " FROM _lowongan WHERE 1=1";
+            $baseQuery = " FROM _lowongan lo JOIN (SELECT user_id, nama FROM _user WHERE role = 'company') us ON lo.company_id = us.user_id WHERE 1=1";
 
             // Filters
             if ($jobType) {
@@ -43,7 +43,7 @@ class LowonganController extends Controller
             }
 
             // Query to fetch jobs with LIMIT and OFFSET
-            $jobQuery = "SELECT * " . $baseQuery;
+            $jobQuery = "SELECT lo.lowongan_id, us.nama, lo.posisi, lo.jenis_pekerjaan, lo.jenis_lokasi, lo.updated_at" . $baseQuery;
             if ($sort) {
                 $jobQuery .= " ORDER BY updated_at " . $sort;
             }

@@ -12,14 +12,6 @@
 </head>
 
 <body>
-    <?php
-    echo __DIR__;
-    ?>
-    <header>
-        <!-- <a href="../../../index.php"><img class="logo" src="../../assets/img/linkinPurry-Whole.png" alt="LinkinPurry logo"></a> -->
-        <p>Login</p>
-    </header>
-
     <main class="app-content">
         <section class="login-card">
             <div class="header-content">
