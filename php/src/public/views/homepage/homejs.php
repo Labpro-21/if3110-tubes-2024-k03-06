@@ -83,7 +83,7 @@
                         <i class="fas fa-angle-left"></i>
                     </button>   
                     <div id="page-buttons"></div>
-                    <button id="next-btn" class="pagination-button">
+                    <button id="next-btn" class="pagination-button" disabled>
                         <i class="fas fa-angle-right"></i>
                     </button>
                 </div>
