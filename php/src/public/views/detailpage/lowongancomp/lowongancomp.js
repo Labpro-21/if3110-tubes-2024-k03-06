@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.success) {
               alert("Job successfully deleted.");
-              window.location.href = "/lowongan/list";
+              window.location.href = "/home";
             } else {
               alert(
                 "Terjadi kesalahan saat menghapus pekerjaan: " +
