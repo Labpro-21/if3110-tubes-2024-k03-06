@@ -34,7 +34,7 @@ if (session_status() == PHP_SESSION_NONE) {
             if ((isset($_SESSION["user"]) && $_SESSION["user"]->role == "jobseeker")) :
         ?>
             <div class="nav-item">
-                <a href="#">
+                <a href="/jobhistory">
                     <i class="fas fa-address-card"></i>
                     <span class="nav-text">History</span>
                 </a>
