@@ -11,17 +11,14 @@ class LowonganController extends Controller
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (isset($_SESSION["user"])) {
-            if (isset($_GET['id'])) {
-                $_SESSION['lowongan_id'] = $_GET['id'];
-                if ($_SESSION['user']->role == 'company') {
-                    $this->load("detailpage/lowongancomp/lowongancomp");
-                } else {
-                    $this->load("detailpage/lowonganjs/lowonganjs");
-                }
+
+        if (isset($_GET['id'])) {
+            $_SESSION['lowongan_id'] = $_GET['id'];
+            if ($_SESSION['user']->role == 'company') {
+                $this->load("detailpage/lowongancomp/lowongancomp");
+            } else {
+                $this->load("detailpage/lowonganjs/lowonganjs");
             }
-        } else {
-            header("Location: /index");
         }
     }
 
@@ -357,7 +354,7 @@ class LowonganController extends Controller
                 try {
                     $db = Database::getInstance();
                     $conn = $db->getConnection();
-                    
+
                     $stmt = $conn->prepare("SELECT file_path FROM _attachment_lowongan WHERE lowongan_id = :low_id");
                     $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
                     $stmt->execute();

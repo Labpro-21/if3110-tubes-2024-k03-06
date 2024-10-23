@@ -12,12 +12,14 @@ $stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
 $stmt->execute();
 $attachment = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $conn->prepare("SELECT * FROM _lamaran WHERE lowongan_id = :low_id AND user_id = :userid");
-$stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
-$stmt->bindParam(':userid', $_SESSION['user']->id);
-$stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$lamaran = $stmt->fetch();
+if(isset($_SESSION['user']) && $_SESSION['lowongan_id']) {
+    $stmt = $conn->prepare("SELECT * FROM _lamaran WHERE lowongan_id = :low_id AND user_id = :userid");
+    $stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
+    $stmt->bindParam(':userid', $_SESSION['user']->id);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $lamaran = $stmt->fetch();
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +73,7 @@ $lamaran = $stmt->fetch();
                     </h3>
                 </div>
                 <div class="job-attachment">
-                    <h4 class="job-details"> Job Attachment: </h4>
+                    <h4 class="job-details">Job Attachment: </h4>
                     <?php foreach ($attachment as $row) {
                         echo '<a href="' . $row['file_path'] . '" target="_blank">';
                         echo '<img src="' . $row['file_path'] . '" class="image" alt="' . basename($row['file_path']) . '">';
@@ -83,29 +85,33 @@ $lamaran = $stmt->fetch();
                 <h4 class="job-details">
                     Last Update: <span><?php echo $lowongan['updated_at']?></span></h4>
                 <?php
-                if ($lamaran) {
-                    echo '<a href="' . $lamaran['cv_path'] . '"> Link To Your CV </a>';
-                    if ($lamaran['video_path'] !== '') {
-                        echo '<a href="' . $lamaran['video_path'] . '"> Link To Your Video </a>';
-                    }
-                    echo '<h4> Status Lamaran: ' . $lamaran['status'] . '</h4>';
-                    if ($lamaran['status_reason'] !== '') {
-                        echo '<h4> Message:</h4>';
-                        echo '<div class="message">';
-                        echo $lamaran['status_reason'];
-                        echo '</div>';
+                if(isset($_SESSION['user'])) {
+                    if ($lamaran) {
+                        echo '<a href="' . $lamaran['cv_path'] . '"> Link To Your CV</a> <br>';
+                        if ($lamaran['video_path'] != '') {
+                            echo '<a href="' . $lamaran['video_path'] . '"> Link To Your Video </a>';
+                        }
+                        echo '<h4> Status Lamaran: ' . $lamaran['status'] . '</h4>';
+                        if ($lamaran['status_reason'] != '') {
+                            echo '<h4> Message:</h4>';
+                            echo '<div class="message">';
+                            echo $lamaran['status_reason'];
+                            echo '</div>';
+                        }
+                    } else {
+                        if ($lowongan['is_open']) {
+                            echo
+                            '<a href="/lamar">
+                                    <button class="lamar-button" id="lamar-button">
+                                        Lamar
+                                    </button>
+                                </a>';
+                        } else {
+                            echo '<h4> Maaf Lowongan ini sudah ditutup </h4>';
+                        }
                     }
                 } else {
-                    if ($lowongan['is_open']) {
-                        echo
-                        '<a href="/lamar">
-                                <button class="lamar-button" id="lamar-button">
-                                    Lamar
-                                </button>
-                            </a>';
-                    } else {
-                        echo '<h4> Maaf Lowongan ini sudah ditutup </h4>';
-                    }
+                    echo '<h4> Silahkan login/register untuk melamar pekerjaan ini </h4>';
                 }
                 ?>
             </div>
