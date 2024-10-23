@@ -95,4 +95,32 @@ class Company
             return false;
         }
     }
+
+    public function editLowongan($title, $description, $type, $location, $imagePaths)
+    {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+
+        $stmt1 = $conn->prepare("UPDATE _lowongan SET posisi = :title, deskripsi = :description, jenis_pekerjaan = :type, jenis_lokasi = :location, updated_at = NOW() WHERE lowongan_id = :lowongan_id");
+        $stmt1->bindParam(':title', $title);
+        $stmt1->bindParam(':description', $description);
+        $stmt1->bindParam(':type', $type);
+        $stmt1->bindParam(':location', $location);
+        $stmt1->bindParam(':lowongan_id', $_SESSION['lowongan_id']);
+        $stmt1->execute();
+
+        if ($stmt1->execute()) {
+            if (count($imagePaths) > 0) {
+                foreach ($imagePaths as $targetFile) {
+                    $stmt2 = $conn->prepare("INSERT INTO _attachment_lowongan (lowongan_id, file_path) VALUES (:lowongan_id, :file_path)");
+                    $stmt2->bindParam(':lowongan_id', $_SESSION['lowongan_id']);
+                    $stmt2->bindParam(':file_path', $targetFile);
+                    $stmt2->execute();
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

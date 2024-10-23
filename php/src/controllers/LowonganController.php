@@ -31,7 +31,7 @@ class LowonganController extends Controller
             $sort = isset($_GET['job-sort']) ? $_GET['job-sort'] : '';
             $jobType = isset($_GET['job-type']) ? $_GET['job-type'] : '';
             $jobLocation = isset($_GET['job-location']) ? $_GET['job-location'] : '';
-            $search = isset($_GET['search']) ? $_GET['search'] :'';
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
 
             // Where 1 = 1 is used to enable appending filters
             $baseQuery = " FROM _lowongan lo JOIN (SELECT user_id, nama FROM _user WHERE role = 'company') us ON lo.company_id = us.user_id WHERE 1=1";
@@ -172,7 +172,7 @@ class LowonganController extends Controller
             }
         }
     }
-    
+
     public function toEditJob()
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -187,6 +187,98 @@ class LowonganController extends Controller
             $this->load("login/login");
         }
     }
+
+    public function editJob()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            // Ambil data dari form
+            $lowongan_id = $_SESSION['lowongan_id'];
+            $title = $_POST['job-title'];
+            $description = $_POST['job-description'];
+            $type = $_POST['job-type'];
+            $location = $_POST['job-location'];
+            $delete_images = isset($_POST['delete_images']) ? $_POST['delete_images'] : [];
+
+            $targetDir = "public/uploads/job_images/";
+            // Buat direktori jika belum ada
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
+
+            try {
+                $db = Database::getInstance();
+                $conn = $db->getConnection();
+
+                $stmt = $conn->prepare("UPDATE _lowongan SET posisi = :title, deskripsi = :description, jenis_pekerjaan = :type, jenis_lokasi = :location, updated_at = NOW() WHERE lowongan_id = :lowongan_id");
+                $stmt->bindParam(':title', $title);
+                $stmt->bindParam(':description', $description);
+                $stmt->bindParam(':type', $type);
+                $stmt->bindParam(':location', $location);
+                $stmt->bindParam(':lowongan_id', $lowongan_id);
+                $stmt->execute();
+
+                // Handle delete attachments
+                if (!empty($delete_images)) {
+                    foreach ($delete_images as $attachment_id) {
+                        $stmt = $conn->prepare("SELECT file_path FROM _attachment_lowongan WHERE attachment_id = :attachment_id");
+                        $stmt->bindParam(':attachment_id', $attachment_id);
+                        $stmt->execute();
+                        $attachment = $stmt->fetch(PDO::FETCH_ASSOC);
+                        if (file_exists($attachment['file_path'])) {
+                            unlink($attachment['file_path']);
+                        }
+
+                        $stmt = $conn->prepare("DELETE FROM _attachment_lowongan WHERE attachment_id = :attachment_id");
+                        $stmt->bindParam(':attachment_id', $attachment_id, PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+                }
+
+                // Handle upload gambar baru
+                if (isset($_FILES['job-image']) && $_FILES['job-image']['error'][0] == UPLOAD_ERR_OK) {
+                    $imagePaths = [];
+                    foreach ($_FILES['job-image']['name'] as $key => $imageNameOriginal) {
+                        $imageFileType = strtolower(pathinfo($imageNameOriginal, PATHINFO_EXTENSION));
+
+                        $imageName = uniqid(md5(time() . '_' . bin2hex(random_bytes(5))), true) . '.' . $imageFileType;
+                        $targetFile = $targetDir . $imageName;
+
+                        if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+                            echo json_encode(['success' => false, 'message' => 'Format gambar tidak valid. Hanya JPG, JPEG, PNG, dan GIF yang diperbolehkan.']);
+                            exit();
+                        }
+
+                        if (!move_uploaded_file($_FILES['job-image']['tmp_name'][$key], $targetFile)) {
+                            echo json_encode(['success' => false, 'message' => 'Gagal mengunggah gambar pekerjaan.']);
+                            exit();
+                        }
+
+                        $imagePaths[] = $targetFile;
+                    }
+
+                    try {
+                        $company = new Company();
+                        if ($company->editLowongan($title, $description, $type, $location, $imagePaths)) {
+                            header("Location: /home");
+                        } else {
+                            echo json_encode(['success' => false, 'message' => 'Gagal menambahkan lowongan.']);
+                        }
+                    } catch (PDOException $e) {
+                        echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+                    }
+                    exit();
+                }
+                header("Location: /home");
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+            }
+        }
+    }
+
 
     public function openJob()
     {
