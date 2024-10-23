@@ -1,3 +1,19 @@
+<?php
+$db = Database::getInstance();
+$conn = $db->getConnection();
+$stmt = $conn->prepare("SELECT * FROM _lowongan WHERE company_id = :company_id");
+$stmt->bindParam(':company_id', $_SESSION['user']->id);
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$lowonganList = $stmt->fetchAll();
+
+$stmt = $conn->prepare("SELECT * FROM _user JOIN _company_detail ON _user.user_id = _company_detail.user_id WHERE _user.user_id = :id");
+$stmt->bindParam(':id', $_SESSION['user']->id);
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$company = $stmt->fetch();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,17 +26,25 @@
 
         <div class="container">
             <div class="company-info">
-                <h1>Company Name</h1>
-                <p>Location: Hybrid</p>
+                <h1>
+                    <?php
+                    echo $company['nama'];
+                    ?>
+                </h1>
+                <p>Lokasi :</p>
             </div>
             <div class="company-description">
                 <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla libero a turpis viverra vehicula. Sed ac pellentesque ligula, ac pharetra justo. Donec ut erat vitae tortor accumsan convallis. Aenean ornare commodo purus sed semper. Sed fermentum et mi ac condimentum. Etiam sed sagittis ex, in imperdiet urna. Cras iaculis ante et purus molestie lacinia. Mauris id dolor et velit tempus imperdiet sit amet vel arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus interdum venenatis quam. Fusce ullamcorper at arcu ut placerat. Nulla facilisi.
+                    <?php
+                    echo $company['about'];
+                    ?>
                 </p>
             </div>
 
             <div class="edit-profile">
-                <button>Edit Profile</button>
+                <a href="/public/views/profile/updateprofile.php">
+                    <button>Edit Profile</button>
+                </a>
             </div>
         </div>
     </body>

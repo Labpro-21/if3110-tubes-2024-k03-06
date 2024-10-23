@@ -8,7 +8,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #f3f2ef;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -30,6 +30,7 @@ body {
 /* Sidebar styling */
 .sidebar {
     border-radius: 10px;
+    background-color: white;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 15%; /* Reduced width for responsiveness */
