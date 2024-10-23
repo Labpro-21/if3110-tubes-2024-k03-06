@@ -26,7 +26,7 @@ $lamaran = $stmt->fetch();
     <!-- Desktop Navbar -->
     <?php
     echo '<div id="desktop-navbar">';
-    include_once __DIR__ . '/../../navbar/navbarcomp.php';
+    include_once __DIR__ . '/../../navbar/navbarjs.php';
     echo '</div>';
     ?>
 
@@ -39,7 +39,7 @@ $lamaran = $stmt->fetch();
         <div class="detail-lamar">
             <form id="form-review">
                 <h3 id="details">
-                    <?php echo $_SESSION['user']->nama ?>'s Application Details
+                    <?php echo $lamaran['nama'] ?>'s Application Details
                 </h3>
 
                 <!-- CV -->

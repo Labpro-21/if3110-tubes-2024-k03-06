@@ -7,11 +7,11 @@ $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $lowonganList = $stmt->fetchAll();
 
-$stmt = $conn->prepare("SELECT * FROM _user JOIN _company_detail ON _user.user_id = _company_detail.user_id WHERE _user.user_id = :id");
+$stmt = $conn->prepare("SELECT lokasi FROM _company_detail WHERE user_id = :id");
 $stmt->bindParam(':id', $_SESSION['user']->id);
 $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-$company = $stmt->fetch();
+$company_loc = $stmt->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -38,14 +38,9 @@ $company = $stmt->fetch();
             <div class="profile-info">
                 <h4>
                     <?php
-                    echo $company['nama'];
+                    echo $_SESSION['user']->nama;
                     ?>
                 </h4>
-                <p class="about">
-                    <?php
-                    echo $company['about'];
-                    ?>
-                </p>
             </div>
             <div class="filter">
                 <p class="filter-title">Job Preference :</p>
@@ -105,7 +100,7 @@ $company = $stmt->fetch();
                             </a>
                         </p>
                         <p class="job-details">
-                            <?php echo $company['lokasi'] . ' (' . $lowongan['jenis_lokasi'] . ')'; ?>
+                            <?php echo $company_loc['lokasi'] . ' (' . $lowongan['jenis_lokasi'] . ')'; ?>
                         </p>
                         <p class="job-details">
                             Last Update: <?php echo $lowongan['updated_at']; ?>

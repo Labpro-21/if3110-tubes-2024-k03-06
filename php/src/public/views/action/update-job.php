@@ -48,7 +48,7 @@ $attachments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="update-job">
             <div class="container">
                 <div class="back-button">
-                    <i class='fas fa-arrow-circle-left'></i>
+                    <i class='fas fa-arrow-circle-left' onclick="history.back()"></i>
                 </div>
                 <form id="update-job-form" action="/lowongan/editJob" method="POST" enctype="multipart/form-data">
                     <div class="update-job-form">
