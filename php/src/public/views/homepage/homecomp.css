@@ -20,10 +20,11 @@ body {
     position: fixed;
     padding-top: 2rem;
     padding: 0;
+    padding-bottom: 20px;
     left: 50px;
     display: flex;
     flex-direction: column;
-    height: 55%;
+    height: auto;
 }
 .home-picture{
     position: relative;
@@ -89,7 +90,7 @@ body {
 }
 .search-button button{
     padding: 8px 10px;
-    margin-left: 90px;
+    margin-left: 58%;
     background-color: #007bff;
     color: white;
     border: none;
@@ -106,7 +107,7 @@ body {
 }
 .main-content {
     margin-left: 19%;
-    height: 95vh;
+    height: auto;
     width: 50%;
 }
 .main-content h2{
@@ -130,14 +131,14 @@ body {
     justify-content: center;
 }
 .add-jobs button {
-    width: 70%;
-    height: 70%;
+    width: 40%;
+    height: 50%;
     border: none;
     background-color: #007bff;
     color: white;
-    border-radius:20px;
+    border-radius:10px;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 20px;
 }
 .add-jobs button:hover {
     background-color: #0056b3;
@@ -263,7 +264,7 @@ body {
     /* Adjust sidebar for mobile to be full width */
     .sidebar {
         width: 60%;
-        height: 59vh;
+        height: auto;
         position: relative;
         left: 0;
         top: 0;
@@ -304,15 +305,14 @@ body {
     /* Make main content full width on mobile */
     .main-content {
         width: 70%;
-        height: 105vh;
+        height: auto;
         margin: 0;
     }
     /* Make guidance section full width on mobile */
     .add-jobs {
         width: 40%;
-        height: 50px;
+        height: auto;
         margin: 1rem 0;
-        margin-left: 20px; 
     }
 
     .add-jobs button {
@@ -324,6 +324,7 @@ body {
         border-radius:20px;
         cursor: pointer;
         font-size: 20px;
+        padding: 10px ;
     }
     /* Adjust pagination on mobile */
     .pagination {
