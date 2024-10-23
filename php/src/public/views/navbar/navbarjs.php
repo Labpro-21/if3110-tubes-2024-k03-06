@@ -16,7 +16,9 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
 <div class="navbar">
     <div class="navbar-left">
-        <i class='fab'>&#xf08c;</i>
+        <a href="/home">
+            <i class='fab'>&#xf08c;</i>
+        </a>
         <form class="search-bar" action="/home" method="GET">
             <i class="fas fa-search"></i>
             <input type="text" id="search-bar" name="search" placeholder="Title, skill or company">
@@ -55,7 +57,7 @@ if (session_status() == PHP_SESSION_NONE) {
             if ((isset($_SESSION["user"]) && $_SESSION["user"]->role == "company")) :
         ?>
             <div class="nav-item">
-                <a href="#">
+                <a href="/profile">
                     <i class="fas fa-briefcase"></i>
                     <span class="nav-text">Company</span>
                 </a>
