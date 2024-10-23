@@ -96,6 +96,14 @@ body {
     gap: 20px;
 }
 
+.job-history-item-title a {
+    text-decoration: none;
+}
+
+.job-history-item-title a :hover {
+    text-decoration: underline;
+}
+
 .job-history-item {
     background-color: #fafafa;
     padding: 20px;

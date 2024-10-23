@@ -25,7 +25,10 @@ $company_loc = $stmt->fetch();
 </head>
 
 <body>
-    <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+    <nav>
+        <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+    </nav>
+
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
