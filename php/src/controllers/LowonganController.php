@@ -133,8 +133,8 @@ class LowonganController extends Controller
                 mkdir($targetDir, 0777, true);
             }
 
+            $imagePaths = [];
             if (isset($_FILES['image']) && $_FILES['image']['error'][0] == UPLOAD_ERR_OK) {
-                $imagePaths = [];
 
                 foreach ($_FILES['image']['name'] as $key => $imageNameOriginal) {
                     $imageFileType = strtolower(pathinfo($imageNameOriginal, PATHINFO_EXTENSION));
@@ -157,19 +157,18 @@ class LowonganController extends Controller
 
                     $imagePaths[] = $targetFile;
                 }
-
-                try {
-                    $company = new Company();
-                    if ($company->addLowongan($title, $description, $type, $location, $imagePaths)) {
-                        echo json_encode(['success' => true, 'message' => 'Lowongan berhasil ditambahkan.']);
-                    } else {
-                        echo json_encode(['success' => false, 'message' => 'Gagal menambahkan lowongan.']);
-                    }
-                } catch (PDOException $e) {
-                    echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
-                }
-                exit();
             }
+            try {
+                $company = new Company();
+                if ($company->addLowongan($title, $description, $type, $location, $imagePaths)) {
+                    echo json_encode(['success' => true, 'message' => 'Lowongan berhasil ditambahkan.']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Gagal menambahkan lowongan.']);
+                }
+            } catch (PDOException $e) {
+                echo json_encode(['success' => false, 'message' => 'Kesalahan: ' . $e->getMessage()]);
+            }
+            exit();
         }
     }
 
@@ -354,6 +353,21 @@ class LowonganController extends Controller
                 try {
                     $db = Database::getInstance();
                     $conn = $db->getConnection();
+                    
+                    $stmt = $conn->prepare("SELECT file_path FROM _attachment_lowongan WHERE lowongan_id = :low_id");
+                    $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $attachments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($attachments as $attachment) {
+                        if (file_exists($attachment['file_path'])) {
+                            unlink($attachment['file_path']);
+                        }
+                    }
+
+                    $stmt = $conn->prepare("DELETE FROM _attachment_lowongan WHERE lowongan_id = :low_id");
+                    $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
+                    $stmt->execute();
 
                     $stmt = $conn->prepare("DELETE FROM _lowongan WHERE lowongan_id = :low_id");
                     $stmt->bindParam(':low_id', $low_id, PDO::PARAM_INT);
