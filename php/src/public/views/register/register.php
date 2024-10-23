@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/public/views/register/register.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script defer src="/public/views/register/register.js"></script>
 </head>
 <body>
@@ -66,7 +68,8 @@
 
             <div class="form-group">
                 <label for="about">About the Company</label>
-                <textarea id="about" id="about" name="about"></textarea>
+                <div id="editor"></div>
+                <input type="hidden" name="about" id="about">
                 <small id="aboutError" class="error"></small>
             </div>
         </div>

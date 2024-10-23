@@ -39,6 +39,10 @@ nav {
     font-size: 12px;
 }
 
+#editor {
+    height: 200px;
+}
+
 .select-box {
     border-width: 1px;
     border-style: solid;

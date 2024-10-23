@@ -1,7 +1,23 @@
+var quill = new Quill('#editor', {
+    theme: 'snow',
+});
+
 document.addEventListener("DOMContentLoaded", function() {
+
+    quill.on('text-change', function() {
+        const aboutError = document.getElementById('aboutError');
+        const aboutContent = quill.getText().trim();
+    
+        if (aboutContent.length > 0) {
+            aboutError.textContent = '';
+            document.getElementById('about').classList.remove('invalid');
+        }
+    });
+
     const form = document.getElementById('reg-form');
     const roleInput = document.getElementById('role');
     const roleInputError = document.getElementById('roleError');
+    const aboutInput = document.getElementById('about');
 
     roleInput.addEventListener('change', function() {
         let role = this.value;
@@ -34,18 +50,22 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener('submit', function(event){
         event.preventDefault();
 
+        aboutInput.value = quill.root.innerHTML;
+
         let role = roleInput.value;
-        this.querySelectorAll('select, input, textarea').forEach(input => {
+        this.querySelectorAll('select, input').forEach(input => {
             if (!input.closest('.hidden')) {
                 validateField({ target: input });
             }
         });
 
-        if (this.querySelector('.invalid')) {
+        removeInvalidClassFromSelect();
+        
+        if (this.querySelector('.invalid') || !validateAboutContent()) {
             alert("Please correct the errors in the form before submitting.");
             return;
         }
-
+        
         const formData = new FormData(this);
 
         const xhr = new XMLHttpRequest();
@@ -90,7 +110,10 @@ function validateField(e) {
         } else if (field.name == "role") {
             errorElement.textContent = 'Please select the role you want to register!';
         } else {
-            errorElement.textContent = `The '${capitalizeFirstLetter(field.name)}' field cannot be empty!`;
+            if (errorElement)
+            {
+                errorElement.textContent = `The '${capitalizeFirstLetter(field.name)}' field cannot be empty!`;
+            }
         }
         field.classList.add('invalid');
 
@@ -124,4 +147,35 @@ function validateEmail(email) {
     return email.match(
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
+}
+
+function removeInvalidClassFromSelect() {
+    const selectElement = document.querySelector('select.ql-header.invalid');
+    if (selectElement) {
+        selectElement.classList.remove('invalid');
+    }
+
+    const inputElement = document.querySelector('input.invalid[data-formula][data-link][data-video]');
+    if (inputElement) {
+        inputElement.classList.remove('invalid');
+    }
+}
+
+function validateAboutContent() {
+    const aboutError = document.getElementById('aboutError');
+    const aboutContent = quill.getText().trim(); 
+    console.log('check content: '+  aboutContent);
+    if (aboutContent.length === 0) {
+        if (aboutError) {
+            aboutError.textContent = 'The About field cannot be empty!';
+            document.getElementById('about').classList.add('invalid');
+        }
+        return false;
+    } else {
+        if (aboutError) {
+            aboutError.textContent = '';
+            document.getElementById('about').classList.remove('invalid');
+        }
+        return true;
+    }
 }
