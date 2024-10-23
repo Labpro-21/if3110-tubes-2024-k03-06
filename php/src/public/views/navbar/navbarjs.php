@@ -25,21 +25,63 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <div class="navbar-right">
         <div class="nav-item">
-            <i class="fas fa-home"></i>
-            <a class="nav-text" href="/home">Home</a>
+            <a href="/home">
+                <i class="fas fa-home"></i>
+                <span class="nav-text">Home</span>
+            </a>
         </div>
-        <div class="nav-item">
-            <i class='fas fa-briefcase'></i>
-            <a class="nav-text" href="#">Jobs</a>
-        </div>
-        <div class="nav-item" id="profile-nav">
-            <img src="/public/assets/img/photo.jpeg">
-            <a class="nav-text" href="#">Me</a>
-
-            <div class="dropdown-menu">
-                <a class="dropdown" href="/signout" id="signout">Sign Out</a>
+        <?php 
+            if ((isset($_SESSION["user"]) && $_SESSION["user"]->role == "jobseeker")) :
+        ?>
+            <div class="nav-item">
+                <a href="#">
+                    <i class="fas fa-address-card"></i>
+                    <span class="nav-text">History</span>
+                </a>
             </div>
-        </div>
+
+            <div class="nav-item" id="profile-nav">
+                <img src="/public/assets/img/photo.jpeg">
+                <a class="nav-text" href="#">Me</a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown" href="/signout" id="signout">Sign Out</a>
+                </div>
+            </div>
+        <?php 
+            endif;
+        ?>
+        <?php 
+            if ((isset($_SESSION["user"]) && $_SESSION["user"]->role == "company")) :
+        ?>
+            <div class="nav-item">
+                <a href="#">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="nav-text">Company</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="/signout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="nav-text">Sign Out</span>
+                </a>
+            </div>
+        <?php 
+            endif;
+        ?>
+        <?php
+            if (!isset($_SESSION["user"])) :
+        ?>
+            <div class="nav-item">
+                <a href="/login" class="loginButton">Log In</a>
+            </div>
+            <div class="nav-item">
+                <a href="/register" class="registerButton">Register</a>
+            </div>
+        <?php 
+            endif;
+        ?>
     </div>
 </div>
 

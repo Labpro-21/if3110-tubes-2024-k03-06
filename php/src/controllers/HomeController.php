@@ -7,14 +7,10 @@ class HomeController extends Controller {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (isset($_SESSION["user"])) {
-            if ($_SESSION["user"]->role == "jobseeker") {
-                $this->load("jobhistory/history");
-            } else {
-                $this->load("homepage/homecomp");
-            }
+        if (isset($_SESSION["user"]) && $_SESSION["user"]->role == "company") {
+            $this->load("homepage/homecomp");
         } else {
-            $this->load("login/login");
+            $this->load("homepage/homejs");
         }
     }
 }

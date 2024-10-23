@@ -23,7 +23,12 @@
                 </div>
                 <div class="profile-info">
                     <h4>
-                        <?php echo $_SESSION['user']->nama; ?>
+                        <?php 
+                            if (session_status() == PHP_SESSION_NONE) {
+                                session_start();
+                            }
+                            echo isset($_SESSION['user']) ? $_SESSION['user']->nama : 'Guest';
+                        ?>
                     </h4>
                     <!-- <p class="about">Undergraduate Student at Bandung Institute Of Technology </p> -->
                 </div>
@@ -74,6 +79,10 @@
             <div class="main-content">
                 <h2>Top job picks for you</h2>
                 <p class="main-content-text">Based on your profile, preferences, and activity like applies, searches, and saves</p>
+                <?php
+                    echo isset($_GET['search']) ? '<h4>Showing search result for: "' . $_GET['search'] . '"</h4>': '';
+                ?>
+                
                 <div class="joblist">
 
                 </div>
