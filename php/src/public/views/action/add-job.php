@@ -4,7 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="./public/views/action/add-job.css">
+        <link rel="stylesheet" href="/public/views/action/add-job.css">
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <script src="/public/views/action/add-job.js"></script>
     </head>
     <body>
         <div class="navbar">
@@ -14,13 +17,13 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="home-picture">
-                <img src="./public/assets/img/itb.jpeg">
+                <img src="/public/assets/img/itb.jpeg">
             </div>
             <div class="profile-picture">
-                <img src="./public/assets/img/photo.jpeg">
+                <img src="/public/assets/img/photo.jpeg">
             </div>
             <div class="profile-info">
-                <h4>Repsol Honda</h4>
+                <?php echo '<h3>' . $_SESSION['user']->nama . '</h3>'; ?>
                 <p class="about">Motorcycle Company </p>
             </div>
         </div>
@@ -41,7 +44,7 @@
 
                         <div class="job-description">
                             <p>Job Description:</p>
-                            <input class="input-box" type="text" id="job-title" placeholder="job description" name="job-title" required>
+                            <div id="editor" style="height: 200px;"></div>
                         </div>
                         
                         <div class="dragdown-container">
@@ -60,7 +63,7 @@
                             <div class="job-location">
                                 <p class="add-job-section-title">Job Location:</p>
                                 <div class="add-job-section-right">
-                                    <select id="job-type">
+                                    <select id="job-location">
                                         <option value="...">...</option>
                                         <option value="hybrid">hybrid</option>
                                         <option value="on-site">on-site</option>
@@ -73,12 +76,13 @@
                         <div class="upload-image">
                             <p class="add-job-section-title">Upload Job Image:</p>
                             <label for="job-image" class="custom-file-upload">Choose File</label>
-                            <input type="file" id="job-image" accept="image/*" style="display: none;">
+                            <input type="file" id="job-image" accept="image/*" style="display: none;" multiple>
                             <span id="file-chosen">No file chosen</span>
                         </div>
+                        <div id="preview"></div>
 
                         <div class="add-button">
-                            <button>Add</button>
+                            <button id="add-button">Add</button>
                         </div>
                     </div>
                 </div>            

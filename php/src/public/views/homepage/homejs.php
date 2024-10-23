@@ -104,10 +104,10 @@
                     <p class="guidance-title">Job seeker guidance</p>
                     <p class="guidance-text">Explore our curated guide of expert-led courses, such as how to improve your resume and grow your network, to help you land your next opportunity.</p>
                     <ul>
-                        <li><a href="#" class="guidance-link">I want to improve my resume</a></li>
-                        <li><a href="#" class="guidance-link">I want to grow my network</a></li>
-                        <li><a href="#" class="guidance-link">I want to ace my interview</a></li>
-                        <li><a href="#" class="guidance-link">I need job search tips</a></li>
+                        <li><a href="./public/views/guidance/guidance1.php" class="guidance-link">I want to improve my resume</a></li>
+                        <li><a href="./public/views/guidance/guidance2.php" class="guidance-link">I want to grow my network</a></li>
+                        <li><a href="./public/views/guidance/guidance3.php" class="guidance-link">I want to ace my interview</a></li>
+                        <li><a href="./public/views/guidance/guidance4.php" class="guidance-link">I need job search tips</a></li>
                     </ul>
                 </div>
             </div>

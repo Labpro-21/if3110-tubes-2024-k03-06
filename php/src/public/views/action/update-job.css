@@ -195,7 +195,7 @@ body {
 /* Media query for mobile view */
 @media (max-width: 768px) {
     body {
-        padding: 0 1rem;
+        padding: 0 1rem;    
     }
 
     .sidebar {

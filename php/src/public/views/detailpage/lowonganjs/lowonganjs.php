@@ -7,6 +7,11 @@ $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $lowongan = $stmt->fetch();
 
+$stmt = $conn->prepare("SELECT * FROM _attachment_lowongan WHERE lowongan_id = :low_id");
+$stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
+$stmt->execute();
+$attachment = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $stmt = $conn->prepare("SELECT * FROM _lamaran WHERE lowongan_id = :low_id AND user_id = :userid");
 $stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
 $stmt->bindParam(':userid', $_SESSION['user']->id);
@@ -65,6 +70,18 @@ $lamaran = $stmt->fetch();
                         ?>
                     </h3>
                 </div>
+                <div class="job-attachment">
+                    <h4 class="job-details"> Job Attachment: </h4>
+                    <?php foreach ($attachment as $row) {
+                        echo '<a href="' . $row['file_path'] . '" target="_blank">';
+                        echo '<img src="' . $row['file_path'] . '" class="image" alt="' . basename($row['file_path']) . '">';
+                        echo '</a>';
+                    } ?>
+                </div>
+                <h4 class="job-details">
+                    Created At: <span><?php echo $lowongan['created_at']?></span></h4>
+                <h4 class="job-details">
+                    Last Update: <span><?php echo $lowongan['updated_at']?></span></h4>
                 <?php
                 if ($lamaran) {
                     echo '<a href="' . $lamaran['cv_path'] . '"> Link To Your CV </a>';

@@ -7,6 +7,11 @@ $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $lowongan = $stmt->fetch();
 
+$stmt = $conn->prepare("SELECT * FROM _attachment_lowongan WHERE lowongan_id = :low_id");
+$stmt->bindParam(':low_id', $_SESSION['lowongan_id']);
+$stmt->execute();
+$attachment = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $stmt = $conn->prepare("
     SELECT u.nama, l.status, l.lamaran_id 
     FROM _lamaran l
@@ -84,11 +89,23 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             </div>
             <div class="right">
-                <p class="deskripsi">
+                <div class="job-attachment">
+                    <h4 class="job-attach">
+                        Job Attachment:
+                    </h4>
                     <?php
-                    echo $lowongan['deskripsi'];
-                    ?>
-                </p>
+                    foreach ($attachment as $row) {
+                        echo '<a href="' . $row['file_path'] . '" target="_blank">';
+                        echo '<img src="' . $row['file_path'] . '" class="image" alt="' . basename($row['file_path']) . '">';
+                        echo '</a>';
+                    } ?>
+                    <h4 class="job-details">
+                        Created At: <span><?php echo $lowongan['created_at'] ?></span></h4>
+                    <h4 class="job-details">
+                        Last Update: <span><?php echo $lowongan['updated_at'] ?></span></h4>
+                    <h4 class="job-details">Deskripsi: </h4>
+                    <?php echo $lowongan['deskripsi']; ?>
+                </div>
 
                 <h3>Daftar Pelamar</h3>
                 <table class="lamaran-table">
