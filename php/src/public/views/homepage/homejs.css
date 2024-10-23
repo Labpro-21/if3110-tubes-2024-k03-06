@@ -20,14 +20,15 @@ body {
 }
 
 .sidebar {
-    width: 15%;
+    width: 17%;
     position: fixed;
     padding-top: 2rem;
     padding: 0;
+    padding-bottom: 1rem;
     left: 50px;
     display: flex;
     flex-direction: column;
-    height: 55%;
+    height: auto;
 }
 
 .home-picture{
@@ -105,7 +106,7 @@ body {
 
 .search-button button{
     padding: 8px 10px;
-    margin-left: 107px;
+    margin-left: 61%;
     background-color: #007bff;
     color: white;
     border: none;
@@ -124,7 +125,7 @@ body {
 }
 .main-content {
     margin-left: 19%;
-    height: 95vh;
+    height: auto;
     width: 50%;
 }
 
@@ -279,7 +280,7 @@ body {
     /* Adjust sidebar for mobile to be full width */
     .sidebar {
         width: 60%;
-        height: 59vh;
+        height: auto;
         position: relative;
         left: 0;
         top: 0;
@@ -320,14 +321,14 @@ body {
     /* Make main content full width on mobile */
     .main-content {
         width: 70%;
-        height: 105vh;
+        height: auto;
         margin: 0;
     }
 
     /* Make guidance section full width on mobile */
     .guidance {
         width: 70%;
-        height: 30vh;
+        height: auto;
         margin: 1rem 0;
     }
 
