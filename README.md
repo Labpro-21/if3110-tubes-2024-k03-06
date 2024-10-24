@@ -43,7 +43,39 @@ $ docker compose up --build
 2. Open the application in your browser at http://localhost:8080.
 
 ## **Screenshot**
-<img src="Lorem Ipsum"> 
+Welcome Page
+<img src="img/Welcome.png" alt="Welcome">
+
+Register Page
+<img src="img/Register.png" alt="Register">
+
+Home Jobseeker Page
+<img src="img/HomeJs.png" alt="HomeJs">
+
+Home Company Page
+<img src="img/HomeComp.png" alt="HomeComp">
+
+Add Job Page
+<img src="img/AddLow.png" alt="AddLow">
+
+Update Lowongan Page
+<img src="img/UpdateLowongan.png" alt="UpdateLowongan">
+
+Detail Lamaran Page
+<img src="img/DetailLamaran.png" alt="DetailLamaran">
+
+Detail Lowongan Company Page
+<img src="img/DetailLowonganComp.png" alt="DetailLowonganComp">
+
+Detail Lowongan Jobseeker Page
+<img src="img/DetailLowonganJs.png" alt="DetailLowonganJs">
+
+Detail Halaman Lamaran Page
+<img src="img/HalamanLamaran.png" alt="HalamanLamaran">
+
+Detail Halaman Riwayat Page
+<img src="img/Riwayat.png" alt="Riwayat">
+
 
 ## Author
 
