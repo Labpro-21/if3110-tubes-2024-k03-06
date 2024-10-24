@@ -6,7 +6,7 @@ class Controller{
         extract($data);
 
         // Include the requested view file
-        $viewPath = 'public/views/' . $view . '.php';
+        $viewPath = 'views/' . $view . '.php';
 
         // var_dump($viewPath);
 
