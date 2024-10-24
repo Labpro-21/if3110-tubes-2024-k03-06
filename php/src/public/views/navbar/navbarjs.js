@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
             dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
             event.stopPropagation(); // Stop click propagation
         });
-    }
 
-    // Hide dropdown if clicked outside
-    document.addEventListener("click", function() {
-        if (dropdownMenu.style.display === "block") {
-            dropdownMenu.style.display = "none";
-        }
-    });
+        // Hide dropdown if clicked outside
+        document.addEventListener("click", function() {
+            if (dropdownMenu.style.display === "block") {
+                dropdownMenu.style.display = "none";
+            }
+        });
+    }
 });

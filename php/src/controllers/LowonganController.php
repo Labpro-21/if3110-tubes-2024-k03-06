@@ -25,6 +25,10 @@ class LowonganController extends Controller
     public function fetchJobs()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = 3;
             $offset = ($page - 1) * $limit;
@@ -34,8 +38,13 @@ class LowonganController extends Controller
             $jobLocation = isset($_GET['job-location']) ? $_GET['job-location'] : '';
             $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-            // Where 1 = 1 is used to enable appending filters
-            $baseQuery = " FROM _lowongan lo JOIN (SELECT user_id, nama FROM _user WHERE role = 'company') us ON lo.company_id = us.user_id WHERE 1=1";
+            // Where 1 = 1 is used to enable appending filters for guest and js
+            $baseQuery = " FROM _lowongan lo JOIN (SELECT user_id, nama FROM _user WHERE role = 'company') us ON lo.company_id = us.user_id";
+            if (isset($_SESSION["user"]) && $_SESSION["user"]->role == 'company') {
+                $baseQuery .= " JOIN (SELECT user_id, lokasi FROM _company_detail WHERE user_id = ". $_SESSION["user"]->id . ") cd ON us.user_id = cd.user_id";
+            } 
+
+            $baseQuery .= " WHERE 1=1";
 
             // Filters
             if ($jobType) {
@@ -51,7 +60,7 @@ class LowonganController extends Controller
             }
 
             // Query to fetch jobs with LIMIT and OFFSET
-            $jobQuery = "SELECT lo.lowongan_id, us.nama, lo.posisi, lo.jenis_pekerjaan, lo.jenis_lokasi, lo.updated_at" . $baseQuery;
+            $jobQuery = "SELECT *" . $baseQuery;
             if ($sort) {
                 $jobQuery .= " ORDER BY updated_at " . $sort;
             }
@@ -98,7 +107,8 @@ class LowonganController extends Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'lowonganList' => $lowonganList,
-                'totalPages' => $totalPages
+                'totalPages' => $totalPages,
+                'currentRole' => isset($_SESSION["user"]) ? $_SESSION["user"]->role : "",
             ]);
             exit();
         }
