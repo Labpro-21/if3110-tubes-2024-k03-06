@@ -25,7 +25,7 @@ $lamaran = $stmt->fetch();
     <!-- Desktop Navbar -->
     <?php
     echo '<div id="desktop-navbar">';
-    include_once __DIR__ . '/../../navbar/navbarjs.php';
+    include_once __DIR__ . '/../../navbar/navbar.php';
     echo '</div>';
     ?>
 
