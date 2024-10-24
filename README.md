@@ -55,6 +55,12 @@ Home Jobseeker Page
 Home Company Page
 <img src="img/HomeComp.png" alt="HomeComp">
 
+Profile Company Page
+<img src="img/Profile.png" alt="Profile">
+
+Edit Profle Company Page
+<img src="img/EditProfile.png" alt="EditProfile">
+
 Add Job Page
 <img src="img/AddLow.png" alt="AddLow">
 
