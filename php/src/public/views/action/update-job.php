@@ -27,8 +27,42 @@ $attachments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <div class="navbar">
-        <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+        <?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
     </div>
+
+    <nav class="navigation-bar">
+        <div class="hamburger-menu" id="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Title, skill or company">
+                </div>
+            </li>
+            <li>
+                <div class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <a href="/home">Home</a>
+                </div>
+            </li>
+            <li>
+                <div class="nav-item">
+                    <i class='fas fa-briefcase'></i>
+                    <a href="/profile">Company</a>
+                </div>
+            </li>
+            <li>
+                <a href="/signout" class="nav-item-link">
+                    <div class="nav-item">
+                        <i class='fas fa-sign-out-alt'></i>
+                        <span>Sign Out</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <div class="update-job-container">
         <!-- Sidebar -->
@@ -122,5 +156,6 @@ $attachments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </body>
+<script src="/public/views/navbar/navbar-responsive.js"></script>
 
 </html>

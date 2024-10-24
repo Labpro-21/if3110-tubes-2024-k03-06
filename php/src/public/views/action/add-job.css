@@ -3,6 +3,10 @@ body {
     background-color: #f3f2ef;
 }
 
+body .navigation-bar{
+    display: none;
+}
+
 .sidebar {
     background-color: white;
     border-radius: 10px;
@@ -196,6 +200,44 @@ body {
 @media (max-width: 768px) {
     body {
         padding: 0 1rem;
+    }
+
+    body .navbar {
+        display: none; 
+    }
+
+    body .navigation-bar {
+        display: block;
+    }
+    
+    .hamburger-menu {
+        display: block;
+        font-size: 20px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: white;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 100;
+        list-style: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 10px 0;
+    }
+
+    .search-bar input {
+        width: 80%;
     }
 
     .sidebar {

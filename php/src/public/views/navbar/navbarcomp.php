@@ -24,7 +24,7 @@
             </div>
             <div class="nav-item">
                 <i class='fas fa-briefcase'></i>
-                <a href="#">Company</a>
+                <a href="/profile">Company</a>
             </div>
             <a href="/signout" class="nav-item-link">
                 <div class="nav-item">

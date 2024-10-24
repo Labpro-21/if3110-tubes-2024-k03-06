@@ -12,6 +12,42 @@
             <?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
         </div>
 
+        <nav class="navigation-bar">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Title, skill or company">
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <a href="/home">Home</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-item">
+                        <a href="/jobhistory">
+                            <i class="fas fa-address-card"></i>
+                            <span class="nav-text">History</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="/signout" class="nav-item-link">
+                        <div class="nav-item">
+                            <i class='fas fa-sign-out-alt'></i>
+                            <span>Sign Out</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
         <div class="container">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -104,13 +140,14 @@
                     <p class="guidance-title">Job seeker guidance</p>
                     <p class="guidance-text">Explore our curated guide of expert-led courses, such as how to improve your resume and grow your network, to help you land your next opportunity.</p>
                     <ul>
-                        <li><a href="./public/views/guidance/guidance1.php" class="guidance-link">I want to improve my resume</a></li>
-                        <li><a href="./public/views/guidance/guidance2.php" class="guidance-link">I want to grow my network</a></li>
-                        <li><a href="./public/views/guidance/guidance3.php" class="guidance-link">I want to ace my interview</a></li>
-                        <li><a href="./public/views/guidance/guidance4.php" class="guidance-link">I need job search tips</a></li>
+                        <li><a href="home/guidance1" class="guidance-link">I want to improve my resume</a></li>
+                        <li><a href="home/guidance2" class="guidance-link">I want to grow my network</a></li>
+                        <li><a href="home/guidance3" class="guidance-link">I want to ace my interview</a></li>
+                        <li><a href="home/guidance4" class="guidance-link">I need job search tips</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </body>
+    <script src="/public/views/navbar/navbar-responsive.js"></script>
 </html>

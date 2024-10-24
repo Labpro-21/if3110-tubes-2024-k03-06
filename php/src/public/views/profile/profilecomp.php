@@ -22,36 +22,74 @@ $company = $stmt->fetch();
         <link rel="stylesheet" href="./public/views/profile/profilecomp.css">
     </head>
     <body>
-        <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+        <div class="navbar">
+            <?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
+        </div>
 
-        <div class="container">
-            <div class="company-info">
-                <h1>
-                    <?php
-                    echo $company['nama'];
-                    ?>
-                </h1>
-                <p>Lokasi : 
-                    <?php
-                        echo $company['lokasi'];
-                    ?>
-                </p>
+        <nav class="navigation-bar">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <i class="fas fa-bars"></i>
             </div>
-            <div class="company-description">
-                <p>
-                    <?php
-                    echo $company['about'];
-                    ?>
-                </p>
-            </div>
+            <ul class="nav-links" id="nav-links">
+                <li>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Title, skill or company">
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <a href="/home">Home</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-item">
+                        <i class='fas fa-briefcase'></i>
+                        <a href="/profile">Company</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="/signout" class="nav-item-link">
+                        <div class="nav-item">
+                            <i class='fas fa-sign-out-alt'></i>
+                            <span>Sign Out</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-container">
+            <div class="container">
+                <div class="company-info">
+                    <h1>
+                        <?php
+                        echo $company['nama'];
+                        ?>
+                    </h1>
+                    <p>Lokasi : 
+                        <?php
+                            echo $company['lokasi'];
+                        ?>
+                    </p>
+                </div>
+                <div class="company-description">
+                    <p>
+                        <?php
+                        echo $company['about'];
+                        ?>
+                    </p>
+                </div>
 
-            <div class="edit-profile">
-                <a href="/profile/update">
-                    <button>Edit Profile</button>
-                </a>
+                <div class="edit-profile">
+                    <a href="/profile/update">
+                        <button>Edit Profile</button>
+                    </a>
+                </div>
             </div>
         </div>
     </body>
+    <script src="/public/views/navbar/navbar-responsive.js"></script>
 </html>
 
    

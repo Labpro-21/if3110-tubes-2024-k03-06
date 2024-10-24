@@ -144,6 +144,45 @@ body {
         margin: 5rem auto;
     }
 
+    body .navbar {
+        display: none; 
+    }
+
+    body .navigation-bar {
+        display: block;
+    }
+    
+    .hamburger-menu {
+        display: block;
+        font-size: 20px;
+        padding: 20px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: white;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 100;
+        list-style: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 10px 0;
+    }
+
+    .search-bar input {
+        width: 80%;
+    }
+
     .sidebar {
         width: 100%;
         position: relative; /* Remove fixed position on smaller screens */

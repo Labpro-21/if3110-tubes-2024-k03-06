@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/public/views/index/index.css">
 </head>
 <body>
-<?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
 <main>
     <section class="hero-section">
         <div class="hero-content">
@@ -22,6 +21,10 @@
             
             <div class="button-container">
                 <a href="/register" class="registerButton">Register</a>
+            </div>
+
+            <div class="button-container">
+                <a href="/home" class="registerButton">Continue As Guest</a>
             </div>
             
         </div>
