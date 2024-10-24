@@ -87,9 +87,9 @@
                             <div class="filter-group">
                                 <select id="job-type" name="job-type">
                                     <option value="">...</option>
-                                    <option value="Full-time">Full-time</option>
-                                    <option value="Part-time">Part-time</option>
-                                    <option value="Contract">Contract</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
                                 </select>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                             <div class="filter-group">
                                 <select id="job-location" name="job-location">
                                     <option value="">...</option>
-                                    <option value="hybrid">hybrid</option>
-                                    <option value="on-site">on-site</option>
-                                    <option value="remote">remote</option>
+                                    <option value="hybrid">Hybrid</option>
+                                    <option value="on-site">On-site</option>
+                                    <option value="remote">Remote</option>
                                 </select>
                             </div>
                         </div>

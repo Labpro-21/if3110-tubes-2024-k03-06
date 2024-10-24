@@ -93,9 +93,9 @@
                         <div class="filter-group">
                             <select id="job-location" name="job-location">
                                 <option value="">...</option>
-                                <option value="hybrid">hybrid</option>
-                                <option value="on-site">on-site</option>
-                                <option value="remote">remote</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="on-site">On-site</option>
+                                <option value="remote">Remote</option>
                             </select>
                         </div>
                     </div>
