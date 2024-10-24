@@ -107,7 +107,13 @@ $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php echo $lowongan['deskripsi']; ?>
                 </div>
 
+                
                 <h3>Daftar Pelamar</h3>
+                <div class="form-export">
+                    <form action="/lowongan/exportDataPelamar">
+                        <button type="submit" class="buttons export-button">Export Data Pelamar</button>
+                    </form>
+                </div>
                 <table class="lamaran-table">
                     <tr>
                         <th>Nama Pelamar</th>

@@ -123,4 +123,49 @@ class Company
             return false;
         }
     }
+
+    public function exportToCSV($pelamar)
+    {
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename="daftar_pelamar.csv"');
+
+        $output = fopen('php://output', 'w');
+        fputcsv($output, ['Nama', 'Pekerjaan yang Dilamar', 'Tanggal Melamar', 'CV URL','Video URL', 'Status']);
+
+        foreach ($pelamar as $row) {
+            fputcsv($output, [
+                $row['nama'],
+                $row['posisi'],
+                $row['created_at'],
+                $row['cv_path'],
+                $row['video_path'],
+                $row['status'],
+            ]);
+        }
+
+        fclose($output);
+        exit();
+    }
+    public function exportDataPelamar()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $lowongan_id = $_SESSION['lowongan_id'];
+
+        $stmt = $this->db->prepare("
+        SELECT u.nama, l.posisi, la.created_at, la.cv_path,la.video_path, la.status
+        FROM _lamaran la
+        JOIN _user u ON la.user_id = u.user_id
+        JOIN _lowongan l ON la.lowongan_id = l.lowongan_id
+        WHERE la.lowongan_id = :low_id
+    ");
+        $stmt->bindParam(':low_id', $lowongan_id);
+        $stmt->execute();
+
+        $pelamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->exportToCSV($pelamar);
+    }
 }
