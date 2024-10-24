@@ -125,6 +125,20 @@
 .job-details span{
   font-weight: normal;
 }
+
+.form-export {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  padding: 0;
+}
+
+.form-export form{
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
 @media (min-width: 768px) {
   * {
     background-color: #f5f5f5;

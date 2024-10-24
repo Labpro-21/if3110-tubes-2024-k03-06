@@ -388,4 +388,13 @@ class LowonganController extends Controller
             echo json_encode(['success' => false, 'message' => 'Metode request tidak valid.']);
         }
     }
+
+    public function exportDataPelamar()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $company = new Company();
+        $company->exportDataPelamar();   
+    }
 }
