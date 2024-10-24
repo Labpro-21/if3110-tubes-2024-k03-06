@@ -16,7 +16,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
 <div class="navbar">
     <div class="navbar-left">
-        <a href="/home">
+        <a href="/index">
             <i class='fab'>&#xf08c;</i>
         </a>
         <form class="search-bar" action="/home" method="GET">

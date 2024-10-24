@@ -1,17 +1,17 @@
 <?php
-$db = Database::getInstance();
-$conn = $db->getConnection();
-$stmt = $conn->prepare("SELECT * FROM _lowongan WHERE company_id = :company_id");
-$stmt->bindParam(':company_id', $_SESSION['user']->id);
-$stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$lowonganList = $stmt->fetchAll();
+// $db = Database::getInstance();
+// $conn = $db->getConnection();
+// $stmt = $conn->prepare("SELECT * FROM _lowongan WHERE company_id = :company_id");
+// $stmt->bindParam(':company_id', $_SESSION['user']->id);
+// $stmt->execute();
+// $stmt->setFetchMode(PDO::FETCH_ASSOC);
+// $lowonganList = $stmt->fetchAll();
 
-$stmt = $conn->prepare("SELECT lokasi FROM _company_detail WHERE user_id = :id");
-$stmt->bindParam(':id', $_SESSION['user']->id);
-$stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$company_loc = $stmt->fetch();
+// $stmt = $conn->prepare("SELECT lokasi FROM _company_detail WHERE user_id = :id");
+// $stmt->bindParam(':id', $_SESSION['user']->id);
+// $stmt->execute();
+// $stmt->setFetchMode(PDO::FETCH_ASSOC);
+// $company_loc = $stmt->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +21,13 @@ $company_loc = $stmt->fetch();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./public/views/homepage/homecomp.css">
-</head>
+    <link rel="stylesheet" href="/public/views/homepage/homecomp.css">
+    <script defer src="/public/views/homepage/pagination.js"></script>
+</head> 
 
 <body>
     <nav>
-        <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+        <?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
     </nav>
 
     <div class="container">
@@ -51,18 +52,18 @@ $company_loc = $stmt->fetch();
                     <div class="filter-section">
                         <p class="filter-section-title">Time</p>
                         <div class="filter-group">
-                            <select id="job-type">
-                                <option value="...">...</option>
-                                <option value="newest">newest</option>
-                                <option value="oldest">oldest</option>
+                            <select id="job-sort" name="job-sort">
+                                <option value="">...</option>
+                                <option value="DESC">newest</option>
+                                <option value="ASC">oldest</option>
                             </select>
                         </div>
                     </div>
                     <div class="filter-section">
                         <p class="filter-section-title">Job Type</p>
                         <div class="filter-group">
-                            <select id="job-type">
-                                <option value="...">...</option>
+                            <select id="job-type" name="job-type">
+                                <option value="">...</option>
                                 <option value="full-time">Full-time</option>
                                 <option value="part-time">Part-time</option>
                                 <option value="contract">Contract</option>
@@ -72,8 +73,8 @@ $company_loc = $stmt->fetch();
                     <div class="filter-section">
                         <p class="filter-section-title">Job Location</p>
                         <div class="filter-group">
-                            <select id="job-type">
-                                <option value="...">...</option>
+                            <select id="job-location" name="job-location">
+                                <option value="">...</option>
                                 <option value="hybrid">hybrid</option>
                                 <option value="on-site">on-site</option>
                                 <option value="remote">remote</option>
@@ -90,27 +91,15 @@ $company_loc = $stmt->fetch();
         <div class="main-content">
             <h2>Available Job Listings</h2>
             <p class="main-content-about">Here's your company's open jobs</p>
-            <?php foreach ($lowonganList as $lowongan): ?>
-                <div class="job-card-container">
-                    <div class="job-card-icon">
-                        <i class="fas fa-trash-alt" data-id="<?php echo $lowongan['lowongan_id']; ?>"></i>
-                        <i class='far fa-edit' data-id="<?php echo $lowongan['lowongan_id']; ?>"> </i>
-                    </div>
-                    <div class="job-card">
-                        <p class="job-title">
-                            <a href="/lowongan?id=<?php echo $lowongan['lowongan_id'] ?>">
-                                <?php echo $lowongan['posisi']; ?>
-                            </a>
-                        </p>
-                        <p class="job-details">
-                            <?php echo $company_loc['lokasi'] . ' (' . $lowongan['jenis_lokasi'] . ')'; ?>
-                        </p>
-                        <p class="job-details">
-                            Last Update: <?php echo $lowongan['updated_at']; ?>
-                        </p>
-                    </div>
+
+                <?php
+                    echo isset($_GET['search']) ? '<h4>Showing search result for: "' . $_GET['search'] . '"</h4>': '';
+                ?>
+                
+                <div class="joblist">
+
                 </div>
-            <?php endforeach; ?>
+
             <div class="pagination">
                 <button id="prev-btn" class="pagination-button" disabled>
                     <i class="fas fa-angle-left"></i>
