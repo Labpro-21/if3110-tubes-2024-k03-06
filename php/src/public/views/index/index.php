@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/public/views/index/index.css">
 </head>
 <body>
+<?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
 <main>
     <section class="hero-section">
         <div class="hero-content">
