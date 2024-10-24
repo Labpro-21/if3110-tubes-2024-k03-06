@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     roleInput.addEventListener('change', function() {
         let role = this.value;
-    
+        resetFormErrors();
         document.getElementById('companyAdditionalForm').classList.add('hidden');
 
         this.classList.remove('invalid');
@@ -61,10 +61,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         removeInvalidClassFromSelect();
         
-        if (this.querySelector('.invalid') || !validateAboutContent()) {
+        if (this.querySelector('.invalid')) {
+            console.log(this.querySelector('.invalid'));
             alert("Please correct the errors in the form before submitting.");
             return;
         }
+        if(role === 'company' && !validateAboutContent()) {
+            console.log('Invalid form2');
+            alert("Please correct the errors in the form before submitting.");
+            return;
+        };
         
         const formData = new FormData(this);
 
@@ -178,4 +184,15 @@ function validateAboutContent() {
         }
         return true;
     }
+}
+
+function resetFormErrors() {
+    const formElements = document.querySelectorAll('#reg-form input, #reg-form textarea, #reg-form select');
+    formElements.forEach(element => {
+        element.classList.remove('invalid');
+        const errorElement = document.getElementById(`${element.id}Error`);
+        if (errorElement) {
+            errorElement.textContent = "";
+        }
+    });
 }
