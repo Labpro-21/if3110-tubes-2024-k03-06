@@ -32,7 +32,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </head>
     <body>
         <div class="navbar">
-            <?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
+            <?php include __DIR__ . '/../navbar/navbar.php'; ?>
         </div>
 
         <nav class="navigation-bar">

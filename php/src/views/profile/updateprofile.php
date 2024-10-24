@@ -20,7 +20,7 @@ $company = $stmt->fetch();
         <script defer src="/public/scripts/profile/updateprofile.js"></script>
     </head>
     <body>
-        <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+        <?php include __DIR__ . '/../navbar/navbar.php'; ?>
         <div class="container">
             <div class="update-profile-form">
                 <div class="back-button" onclick="history.go(-1);">
