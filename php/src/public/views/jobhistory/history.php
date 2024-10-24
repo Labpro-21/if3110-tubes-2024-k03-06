@@ -1,5 +1,3 @@
-history.php
-
 <?php
 $db = Database::getInstance();
 $conn = $db->getConnection();

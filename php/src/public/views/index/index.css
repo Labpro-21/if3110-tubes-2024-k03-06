@@ -84,3 +84,25 @@ body {
     z-index: -100;
     position: relative;
 }
+
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        min-height: calc(100vh - 76px - 50px);
+    }
+
+    .hero-content {
+        padding-right: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-img {
+        width: 90%;
+        height: auto;
+    }
+}

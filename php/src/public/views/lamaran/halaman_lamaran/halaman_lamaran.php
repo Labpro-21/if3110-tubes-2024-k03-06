@@ -31,52 +31,56 @@ $lowongan = $stmt->fetch();
         <img src="public/assets/img/back.png" alt="Back" class="back-button" onclick="history.back()">
     </nav>
 
-    <div class="container">
-        <div class="nama-pt">
-            <img src="public/assets/img/home.png" alt="PT Logo">
+    <div class="main-container">
+        <div class="container">
+            <div class="nama-pt">
+                <i class="fas fa-building"></i>
+                <h2>
+                    <?php
+                    echo $lowongan['nama'];
+                    ?>
+                </h2>
+            </div>
             <h2>
                 <?php
-                echo $lowongan['nama'];
+                echo $lowongan['posisi'];
                 ?>
             </h2>
-        </div>
-        <h2>
-            <?php
-            echo $lowongan['posisi'];
-            ?>
-        </h2>
-        <div class="tipe-low">
-            <img class="suitcase" src="public/assets/img/suitcase.png" alt="Suitcase">
-            <h3>
-                <?php 
-                echo $lowongan['jenis_lokasi'] . " • " . $lowongan['jenis_pekerjaan'];
-                ?>
-            </h3>
-        </div>
-        <hr>
-
-        <form id="lamar-process" method="POST" enctype="multipart/form-data">
-            <div class="upload-container">
-                <h3>Upload Your Curriculum Vitae (.pdf)<span class="wajib">*</span></h3>
-                <label for="cv-upload" class="custom-file-upload <?php if (isset($_GET['cv_error'])) echo 'error-border'; ?>">
-                    <img src="public/assets/img/attach.png" alt="Attachment Icon" class="attachment-icon">
-                    ATTACH CV
-                </label>
-                <input id="cv-upload" type="file" name="cv" accept=".pdf" />
-
-                <br><br>
-
-                <h3>Upload Video Your Introduction (.mp4)</h3>
-                <label for="video-upload" class="custom-file-upload <?php if (isset($_GET['video_error'])) echo 'error-border'; ?>">
-                    <img src="public/assets/img/attach.png" alt="Attachment Icon" class="attachment-icon">
-                    ATTACH VIDEO
-                </label>
-                <input id="video-upload" type="file" name="video" accept=".mp4" />
+            <div class="tipe-low">
+                <img class="suitcase" src="public/assets/img/suitcase.png" alt="Suitcase">
+                <h3>
+                    <?php 
+                    echo $lowongan['jenis_lokasi'] . " • " . $lowongan['jenis_pekerjaan'];
+                    ?>
+                </h3>
             </div>
-            <small id="lamarError" class="error"></small>
-            <br>
-            <button type="submit" class="submit-application">SUBMIT APPLICATION</button>
-        </form>
+            <hr>
+
+            <form id="lamar-process" method="POST" enctype="multipart/form-data">
+                <div class="upload-container">
+                    <h3>Upload Your Curriculum Vitae (.pdf)<span class="wajib">*</span></h3>
+                    <label for="cv-upload" class="custom-file-upload <?php if (isset($_GET['cv_error'])) echo 'error-border'; ?>">
+                        <img src="public/assets/img/attach.png" alt="Attachment Icon" class="attachment-icon">
+                        ATTACH CV
+                    </label>
+                    <input id="cv-upload" type="file" name="cv" accept=".pdf" />
+
+                    <br><br>
+
+                    <h3>Upload Video Your Introduction (.mp4)</h3>
+                    <label for="video-upload" class="custom-file-upload <?php if (isset($_GET['video_error'])) echo 'error-border'; ?>">
+                        <img src="public/assets/img/attach.png" alt="Attachment Icon" class="attachment-icon">
+                        ATTACH VIDEO
+                    </label>
+                    <input id="video-upload" type="file" name="video" accept=".mp4" />
+                </div>
+                <small id="lamarError" class="error"></small>
+                <br>
+                <div class="submit-button">
+                    <button type="submit" class="submit-application">SUBMIT APPLICATION</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="/public/views/lamaran/halaman_lamaran/halaman_lamaran.js"></script>
 </body>

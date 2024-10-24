@@ -1,5 +1,5 @@
 body {
-    background-color: #ffffff;
+    background-color: #f3f2ef;
     font-family: "Segoe UI", "Roboto", Arial, sans-serif;
 }
 
@@ -16,8 +16,6 @@ div {
 }
 
 .app-content {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex: 1;
     float: none;
@@ -33,7 +31,7 @@ div {
     padding-top: 12px;
     border-radius: 8px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 140px;
     background: white;
     font-size: 12px;
 }
@@ -139,4 +137,43 @@ div {
     text-decoration: underline;
     background-color: rgba(44, 142, 223, 0.653);
     border-radius: 50px;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .login-card {
+        width: 80%;
+        margin-top: 100px;
+        padding: 20px;
+    }
+
+    .header-content h1 {
+        font-size: 2rem;
+    }
+
+    .form-group input {
+        font-size: 1rem;
+        padding: 15px 10px 6px 10px;
+    }
+
+    .form-group label {
+        font-size: 16px;
+    }
+
+    .form-group input:focus ~ label,
+    .form-group input:not(:placeholder-shown) ~ label {
+        top: 4px;
+        left: 8px;
+        font-size: 10px;
+    }
+
+    .button-container button {
+        font-size: 14px;
+        padding: 10px 20px;
+        height: 36px;
+    }
+
+    .subtext a {
+        font-size: 14px;
+    }
 }

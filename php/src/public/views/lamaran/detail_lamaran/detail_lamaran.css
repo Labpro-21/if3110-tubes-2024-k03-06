@@ -147,18 +147,13 @@ select {
   }
 
   .cv-video-container {
-    flex-direction: row;
+    flex-direction: column;
   }
 
-  .cv-box {
+  .cv-box, .video-box {
     margin-right: 20px;
-    width: 48%;
+    width: 100%;
   }
-
-  .video-box {
-    width: 48%;
-  }
-
   .cv-box embed,
   .video-box video {
     height: 400px;
@@ -174,7 +169,7 @@ select {
   .cv-box,
   .video-box {
     width: 100%;
-    margin-right: 0;
+    margin-right: 20px;
   }
 
   .cv-box embed,

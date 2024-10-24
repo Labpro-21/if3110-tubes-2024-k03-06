@@ -87,9 +87,9 @@ if(isset($_SESSION['user']) && $_SESSION['lowongan_id']) {
                 <?php
                 if(isset($_SESSION['user'])) {
                     if ($lamaran) {
-                        echo '<a href="' . $lamaran['cv_path'] . '"> Link To Your CV</a> <br>';
+                        echo '<a class="link" href="' . $lamaran['cv_path'] . '"> Link To Your CV</a> <br>';
                         if ($lamaran['video_path'] != '') {
-                            echo '<a href="' . $lamaran['video_path'] . '"> Link To Your Video </a>';
+                            echo '<a class="link" href="' . $lamaran['video_path'] . '"> Link To Your Video </a>';
                         }
                         echo '<h4> Status Lamaran: ' . $lamaran['status'] . '</h4>';
                         if ($lamaran['status_reason'] != '') {

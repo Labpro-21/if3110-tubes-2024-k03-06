@@ -151,3 +151,46 @@ nav {
     text-decoration: underline;
     font-weight: 600;
 }
+
+/* Media query for tablets and smaller devices */
+@media (max-width: 768px) {
+    body{
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+    }
+    .reg-card {
+        max-width: 60%;
+        padding: 20px;
+    }
+
+    .main-sub {
+        font-size: 13px !important;
+    }
+
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .form-group select{
+        width: 50%;
+    }
+
+    .form-group input {
+        width: 50%;
+    }
+
+    .form-group input, .form-group textarea {
+        font-size: 14px;
+        padding: 0 10px 0 10px;
+    }
+
+    .button-container button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .login-href {
+        font-size: 0.9rem;
+    }
+}

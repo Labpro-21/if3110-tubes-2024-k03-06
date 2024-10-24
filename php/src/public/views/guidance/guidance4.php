@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/public/views/guidance/guidance.css">
     </head>
     <body>
-        <?php include __DIR__ . '/../navbar/navbarcomp.php'; ?>
+        <?php include __DIR__ . '/../navbar/navbarjs.php'; ?>
         <div class="container">
             <div class="guidance">
                 <h1> I need job search tips</h1>

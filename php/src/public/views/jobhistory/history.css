@@ -97,7 +97,7 @@ body {
 }
 
 .job-history-item-title a {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .job-history-item-title a :hover {
