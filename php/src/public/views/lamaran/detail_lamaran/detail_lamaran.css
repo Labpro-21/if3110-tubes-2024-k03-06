@@ -10,6 +10,11 @@
   background-color: #ffffff;
 }
 
+body{
+  font-family: Arial, sans-serif;
+  background-color: #f3f2ef; 
+}
+
 .back-button {
   height: 20px;
 }
@@ -18,18 +23,59 @@
   padding: 60px 20px;
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 #details {
   font-size: 24px;
   font-weight: bold;
-  padding:0;
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.detail-lamar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .detail-lamar h3 {
   font-size: 17px;
   font-weight: normal;
+}
+
+/* Two-box layout */
+.cv-video-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cv-video-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cv-box,
+.video-box {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.cv-box {
+  margin-right: 20px;
+}
+
+.cv-box embed,
+.video-box video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 label {
@@ -39,8 +85,8 @@ label {
 
 textarea {
   width: 100%;
-  padding: 10px; 
-  box-sizing: border-box; 
+  padding: 10px;
+  box-sizing: border-box;
   resize: vertical;
 }
 
@@ -62,11 +108,28 @@ select {
   font-size: 15px;
   font-weight: bold;
   margin-top: 25px;
-  justify-self: center;
+  display: block;
   margin: 25px auto 0 auto;
-  display: block; 
 }
 
+.status{
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.final-review{
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+#editor{
+  background-color: white;
+  color: white;
+}
+
+/* Desktop Styles */
 @media (min-width: 768px) {
   #desktop-navbar {
     display: block;
@@ -83,8 +146,39 @@ select {
     padding-right: 50px;
   }
 
-  .cv{
+  .cv-video-container {
+    flex-direction: row;
+  }
+
+  .cv-box {
+    margin-right: 20px;
+    width: 48%;
+  }
+
+  .video-box {
+    width: 48%;
+  }
+
+  .cv-box embed,
+  .video-box video {
+    height: 400px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .cv-video-container {
+    flex-direction: column;
+  }
+
+  .cv-box,
+  .video-box {
     width: 100%;
-    height: 600px;
+    margin-right: 0;
+  }
+
+  .cv-box embed,
+  .video-box video {
+    height: auto;
   }
 }
