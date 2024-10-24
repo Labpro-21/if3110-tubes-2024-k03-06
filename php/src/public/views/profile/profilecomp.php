@@ -1,11 +1,11 @@
 <?php
 $db = Database::getInstance();
 $conn = $db->getConnection();
-$stmt = $conn->prepare("SELECT * FROM _lowongan WHERE company_id = :company_id");
-$stmt->bindParam(':company_id', $_SESSION['user']->id);
-$stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$lowonganList = $stmt->fetchAll();
+// $stmt = $conn->prepare("SELECT * FROM _lowongan WHERE company_id = :company_id");
+// $stmt->bindParam(':company_id', $_SESSION['user']->id);
+// $stmt->execute();
+// $stmt->setFetchMode(PDO::FETCH_ASSOC);
+// $lowonganList = $stmt->fetchAll();
 
 $stmt = $conn->prepare("SELECT * FROM _user JOIN _company_detail ON _user.user_id = _company_detail.user_id WHERE _user.user_id = :id");
 $stmt->bindParam(':id', $_SESSION['user']->id);
@@ -31,7 +31,11 @@ $company = $stmt->fetch();
                     echo $company['nama'];
                     ?>
                 </h1>
-                <p>Lokasi :</p>
+                <p>Lokasi : 
+                    <?php
+                        echo $company['lokasi'];
+                    ?>
+                </p>
             </div>
             <div class="company-description">
                 <p>
@@ -42,7 +46,7 @@ $company = $stmt->fetch();
             </div>
 
             <div class="edit-profile">
-                <a href="/public/views/profile/updateprofile.php">
+                <a href="/profile/update">
                     <button>Edit Profile</button>
                 </a>
             </div>

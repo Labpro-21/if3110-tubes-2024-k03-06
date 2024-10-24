@@ -49,6 +49,22 @@ h1 {
     cursor: pointer;
 }
 
+.error { color: red; }
+
+small {
+    font-weight: 500;
+    height: 6px;
+    margin-bottom: 10px;
+}
+
+.back-button:hover i {
+    color: #3f51b5;
+}
+
+#editor {
+    height: 200px;
+}
+
 .update-profile-container {
     margin-top: 20px;
 }
