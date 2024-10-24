@@ -6,8 +6,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="/public/views/action/add-job.css">
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
-        <script src="/public/views/action/add-job.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <script defer src="/public/views/action/add-job.js"></script>
     </head>
     <body>
         <div class="navbar">
@@ -65,9 +65,9 @@
                                 <div class="add-job-section-right">
                                     <select id="job-location">
                                         <option value="...">...</option>
-                                        <option value="hybrid">hybrid</option>
-                                        <option value="on-site">on-site</option>
-                                        <option value="remote">remote</option>
+                                        <option value="hybrid">Hybrid</option>
+                                        <option value="on-site">On-site</option>
+                                        <option value="remote">Remote</option>
                                     </select>
                                 </div>
                             </div>
