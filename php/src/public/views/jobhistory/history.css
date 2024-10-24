@@ -15,6 +15,10 @@ body {
     min-height: 100vh;
 }
 
+body .navigation-bar{
+    display: none;
+}
+
 /* Container layout */
 .container {
     display: flex;
