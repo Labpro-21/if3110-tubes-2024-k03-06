@@ -68,10 +68,10 @@ $attachments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="home-picture">
-                <img src="/public/assets/img/itb.jpeg">
+                <img src="/public/assets/img/skyscrapper-photo.jpeg">
             </div>
             <div class="profile-picture">
-                <img src="/public/assets/img/photo.jpeg">
+                <img src="/public/assets/img/company-photo.jpeg">
             </div>
             <div class="profile-info">
                 <h4>Repsol Honda</h4>

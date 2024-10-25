@@ -51,10 +51,10 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="home-picture">
-                <img src="/public/assets/img/itb.jpeg">
+                <img src="/public/assets/img/skyscrapper-photo.jpeg">
             </div>
             <div class="profile-picture">
-                <img src="/public/assets/img/photo.jpeg">
+                <img src="/public/assets/img/company-photo.jpeg">
             </div>
             <div class="profile-info">
                 <?php echo '<h3>' . $_SESSION['user']->nama . '</h3>'; ?>
@@ -65,7 +65,7 @@
         <div class="add-job">
             <div class="container">
                 <div class="back-button">
-                    <i class='fas fa-arrow-circle-left'></i>
+                    <i class='fas fa-arrow-circle-left' onclick="history.back()"></i>
                 </div>
         
                 <div class="add-job-form">
